@@ -63,6 +63,33 @@ Database defaultnya adalah PostgreSql, namun anda juga bisa mengubahnya ke Mysql
 6. setelah disetting silahkan gunakkan perintah _php spark migrate:refresh_ untuk membuat table ke databasenya, dan _php spark db:seed InitSeeder_ untuk memasukkan data awal ke table yang telah dibuat
 7. selesai
 
+## Akun
+
+1. Akun Superadmin
+
+- Username: superadmin
+- Password: 123456
+
+2. Akun Petugas Pendaftaran
+
+- Username: 19681124 199603 1 006
+- Password: 123456
+
+3. Akun Bendahara Penerimaan Pembantu
+
+- Username: 19681122 199603 1 006
+- Password: 123456
+
+4. Akun Pegawai Yang Berhak
+
+- Username: 19681123 199603 1 006
+- Password: 123456
+
+5. Akun Petugas Loket
+
+- Username: 19681125 199603 1 006
+- Password: 123456
+
 # Lisensi
 
 Cek link ini untuk melihat lisensi Codeigniter [Lisensi Codeigniter 4](https://github.com/codeigniter4/CodeIgniter4).
