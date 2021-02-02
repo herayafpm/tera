@@ -16,13 +16,35 @@ class MyRules
     }
     return false;
   }
+  public function same_money(int $str, $money = 0): bool
+  {
+    if ($str == $money) {
+      return true;
+    }
+    return false;
+  }
+  public function less_than_or_same_money(int $str, $money = 0): bool
+  {
+    if ($str <= $money) {
+      return true;
+    }
+    return false;
+  }
   public function min_length_array(array $arr, $length = 5): bool
   {
     $arr = $arr[0];
     $arr = explode(',', $arr);
-    if (sizeof($arr) >= $length) {
+    if (sizeof($arr) >= $length && $arr[0] != "") {
       return true;
     }
+    return false;
+  }
+  public function max_length_array(array $arr, $length = 2): bool
+  {
+    if (sizeof($arr) <= $length) {
+      return true;
+    }
+
     return false;
   }
   public function find_nik(string $str): bool

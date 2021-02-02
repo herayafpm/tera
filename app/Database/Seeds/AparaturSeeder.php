@@ -66,6 +66,38 @@ class AparaturSeeder extends Seeder
         'aparatur_created' => $date,
         'aparatur_updated' => $date,
       ],
+      [
+        "aparatur_nip" => "19681126 199603 1 006",
+        "aparatur_nama" => "Pegawai Yang Berhak 2",
+        "aparatur_pangkat" => "IIA",
+        "jabatan_id" => 5,
+        'aparatur_created' => $date,
+        'aparatur_updated' => $date,
+      ],
+      [
+        "aparatur_nip" => "19681127 199603 1 006",
+        "aparatur_nama" => "Pegawai Yang Berhak 3",
+        "aparatur_pangkat" => "IIA",
+        "jabatan_id" => 5,
+        'aparatur_created' => $date,
+        'aparatur_updated' => $date,
+      ],
+      [
+        "aparatur_nip" => "19681129 199603 1 006",
+        "aparatur_nama" => "Pegawai Yang Berhak 4",
+        "aparatur_pangkat" => "IIA",
+        "jabatan_id" => 5,
+        'aparatur_created' => $date,
+        'aparatur_updated' => $date,
+      ],
+      [
+        "aparatur_nip" => "19681130 199603 1 006",
+        "aparatur_nama" => "Pegawai Yang Berhak 5",
+        "aparatur_pangkat" => "IIA",
+        "jabatan_id" => 5,
+        'aparatur_created' => $date,
+        'aparatur_updated' => $date,
+      ],
     ];
     $this->db->table('aparatur')->insertBatch($initDatas);
   }

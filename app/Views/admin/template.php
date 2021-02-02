@@ -4,7 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= $_title ?> | <?= env("app.appName") ?></title>
+  <title><?php
+          $title = $_title;
+          $title = str_replace("<span class='toLocaleDateOnly'>", "", $title);
+          $title = str_replace("</span>", "", $title);
+          echo $title;
+          ?> | <?= env("app.appName") ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -159,47 +164,150 @@
                   </li>
                 </ul>
               </li>
+
             <?php endif ?>
             <?php if (isset($_jenis_tempats)) : ?>
               <?php foreach ($_jenis_tempats as $jenis) : ?>
-                <?php if ($_admin->role_id != 1) : ?>
-                  <li class="nav-header">Tera <?= $jenis['jenis_tempat_nama'] ?></li>
-                <?php endif; ?>
                 <?php if ($_admin->role_id == 2) : ?>
-                  <li class="nav-item">
-                    <a href="<?= base_url('admin/tera/pendaftaran/' . $jenis['jenis_tempat_id']) ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/" . $jenis['jenis_tempat_id']) !== false) ? "active" : "" ?>">
-                      <i class="nav-icon fas fa-book"></i>
-                      <p>
-                        Pendaftaran Tera
-                      </p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="<?= base_url("admin/tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/0") ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/0") !== false) ? "active" : "" ?>">
-                      <i class="nav-icon fas fa-clock"></i>
-                      <p>
-                        Tera Diproses
-                      </p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="<?= base_url("admin/tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/1") ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/1") !== false) ? "active" : "" ?>">
-                      <i class="nav-icon fas fa-check"></i>
-                      <p>
-                        Tera Diverifikasi
-                      </p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="<?= base_url("admin/tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/2") ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/riwayat/{$jenis['jenis_tempat_id']}/2") !== false) ? "active" : "" ?>">
-                      <i class="nav-icon fas fa-times"></i>
-                      <p>
-                        Tera Dibatalkan
-                      </p>
-                    </a>
-                  </li>
+                  <li class="nav-header">Tera <?= $jenis['jenis_tempat_nama'] ?></li>
+                  <?php if ($jenis['jenis_tempat_id'] == 1) : ?>
+                    <li class="nav-item">
+                      <a href="<?= base_url('admin/tera/pendaftaran/' . $jenis['jenis_tempat_id']) ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/" . $jenis['jenis_tempat_id']) !== false && (strpos($uri, "tera/pendaftaran/{$jenis['jenis_tempat_id']}/riwayat") == false)) ? "active" : "" ?>">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                          Pendaftaran Tera
+                        </p>
+                      </a>
+                    </li>
+                  <?php endif ?>
+                  <?php
+                  $no = 0;
+                  foreach ($_tera_statuses as $status) : ?>
+                    <?php
+                    $icon = "clock";
+                    if ($no == 1) {
+                      $icon = "check";
+                    } else if ($no == 2) {
+                      $icon = "times";
+                    }
+                    ?>
+                    <li class="nav-item">
+                      <a href="<?= base_url("admin/tera/pendaftaran/{$jenis['jenis_tempat_id']}/riwayat/{$no}") ?>" class="nav-link <?= (strpos($uri, "tera/pendaftaran/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                        <i class="nav-icon fas fa-<?= $icon ?>"></i>
+                        <p class="text-capitalize">
+                          Tera Di<?= $status ?>
+                        </p>
+                      </a>
+                    </li>
+                  <?php
+                    $no++;
+                  endforeach ?>
+                <?php endif ?>
+                <?php if ($_admin->role_id == 3) : ?>
+                  <li class="nav-header">Tera <?= $jenis['jenis_tempat_nama'] ?></li>
+                  <?php
+                  $no = 0;
+                  foreach ($_tera_pembayaran_statuses as $status) : ?>
+                    <?php
+                    $icon = "clock";
+                    if ($no == 1) {
+                      $icon = "check";
+                    } else if ($no == 2) {
+                      $icon = "money-check";
+                    }
+                    ?>
+                    <li class="nav-item">
+                      <a href="<?= base_url("admin/tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/${no}") ?>" class="nav-link <?= (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                        <i class="nav-icon fas fa-<?= $icon ?>"></i>
+                        <p class="text-capitalize">
+                          Tera Pembayaran <?= $status ?>
+                        </p>
+                      </a>
+                    </li>
+                  <?php
+                    $no++;
+                  endforeach ?>
+                <?php endif ?>
+                <?php if ($_admin->role_id == 4) : ?>
+                  <li class="nav-header">Tera <?= $jenis['jenis_tempat_nama'] ?></li>
+                  <?php
+                  $no = 0;
+                  foreach ($_pengujian_statuses as $status) : ?>
+                    <?php
+                    $icon = "times";
+                    if ($no == 1) {
+                      $icon = "check";
+                    }
+                    ?>
+                    <li class="nav-item">
+                      <a href="<?= base_url("admin/tera/pengujian/{$jenis['jenis_tempat_id']}/riwayat/${no}") ?>" class="nav-link <?= (strpos($uri, "tera/pengujian/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                        <i class="nav-icon fas fa-<?= $icon ?>"></i>
+                        <p class="text-capitalize">
+                          Tera Pengujian <?= $status ?>
+                        </p>
+                      </a>
+                    </li>
+                  <?php
+                    $no++;
+                  endforeach ?>
+                <?php endif ?>
+                <?php if ($_admin->role_id == 5) : ?>
+                  <li class="nav-header">Tera <?= $jenis['jenis_tempat_nama'] ?></li>
+                  <?php
+                  $no = 0;
+                  foreach ($_pengujian_statuses as $status) : ?>
+                    <?php
+                    $icon = "times";
+                    if ($no == 1) {
+                      $icon = "check";
+                    }
+                    ?>
+                    <li class="nav-item">
+                      <a href="<?= base_url("admin/tera/pengujian/{$jenis['jenis_tempat_id']}/riwayat/${no}") ?>" class="nav-link <?= (strpos($uri, "tera/pengujian/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                        <i class="nav-icon fas fa-<?= $icon ?>"></i>
+                        <p class="text-capitalize">
+                          Tera Pengujian <?= $status ?>
+                        </p>
+                      </a>
+                    </li>
+                  <?php
+                    $no++;
+                  endforeach ?>
                 <?php endif ?>
               <?php endforeach ?>
+            <?php endif ?>
+            <?php if (isset($_pengajuan_statuses) && sizeof($_pengajuan_statuses) > 0) : ?>
+              <li class="nav-header">Pengajuan Tera Tempat Pakai</li>
+              <li class="nav-item">
+                <a href="<?= base_url("admin/tera/pengajuan") ?>" class="nav-link <?= (strpos($uri, "admin/tera/pengajuan") !== false) && (strpos($uri, "tera/pengajuan/riwayat") == false) ? "active" : "" ?>">
+                  <i class="nav-icon fas fa-plus"></i>
+                  <p>
+                    Pengajuan Tera
+                  </p>
+                </a>
+              </li>
+              <?php
+              $no = 0;
+              foreach ($_pengajuan_statuses as $status) : ?>
+                <?php
+                $icon = "clock";
+                if ($no == 1) {
+                  $icon = "check";
+                } else if ($no == 2) {
+                  $icon = "times";
+                }
+                ?>
+                <li class="nav-item">
+                  <a href="<?= base_url("admin/tera/pengajuan/riwayat/{$no}") ?>" class="nav-link <?= (strpos($uri, "admin/tera/pengajuan/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                    <i class="nav-icon fas fa-<?= $icon ?>"></i>
+                    <p>
+                      Pengajuan Tera Di<?= $status ?>
+                    </p>
+                  </a>
+                </li>
+              <?php
+                $no++;
+              endforeach ?>
             <?php endif ?>
 
             <li class="nav-header">Akun</li>
@@ -345,7 +453,6 @@
       return moment(date).format(format)
     }
     $(function() {
-      $('[data-toggle="popover"]').popover()
       Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -369,6 +476,8 @@
           title: "<?= $_session->getFlashdata('error') ?>"
         })
       <?php endif; ?>
+      $('.toLocaleDate').html(toLocaleDate($('.toLocaleDate').html(), 'LLL'))
+      $('.toLocaleDateOnly').html(toLocaleDate($('.toLocaleDate').html(), 'LL'))
     });
   </script>
   <?= $this->renderSection('customjs'); ?>

@@ -41,7 +41,11 @@ class BaseController extends Controller
 
     $this->session = \Config\Services::session();
     $this->data['_admin'] = $request->admin;
-    $this->data['_jenis_tempats'] = $request->jenisTempats;
+    $this->data['_jenis_tempats'] = $request->jenisTempats ?? [];
+    $this->data['_tera_statuses'] = $request->teraStatuses ?? [];
+    $this->data['_pengujian_statuses'] = $request->pengujianStatuses ?? [];
+    $this->data['_pengajuan_statuses'] = $request->pengajuanStatuses ?? [];
+    $this->data['_tera_pembayaran_statuses'] = $request->teraPembayaranStatuses ?? [];
     $this->data['uri'] = current_url(true);
     $this->data['_session'] = $this->session;
     //--------------------------------------------------------------------
@@ -50,10 +54,26 @@ class BaseController extends Controller
     // E.g.:
     // $this->session = \Config\Services::session();
   }
+  public function getPengajuanStatus($status)
+  {
+    return $this->data['_pengajuan_status'] = $this->data['_pengajuan_statuses'][$status];
+  }
+  public function getPengujianStatus($status)
+  {
+    return $this->data['_pengujian_status'] = $this->data['_pengujian_statuses'][$status];
+  }
   protected function getJenisTempat($jenis_tempat_id)
   {
     $jenisTempatModel = new JenisTempatModel();
     $this->data['_jenis_tempat'] = $jenisTempatModel->find($jenis_tempat_id);
+  }
+  protected function getTeraStatus($status)
+  {
+    $this->data['_tera_status'] = $this->data['_tera_statuses'][$status];
+  }
+  protected function getTeraPembayaranStatus($status)
+  {
+    $this->data['_tera_pembayaran_status'] = $this->data['_tera_pembayaran_statuses'][$status];
   }
   protected function datatable_data($model, $params = [])
   {

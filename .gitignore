@@ -83,7 +83,9 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-public/assets/vendor/adminlte/*
+vendor/
+vendor/adminlte/*
+vendor/presento/*
 
 #-------------------------
 # IDE / Development Files

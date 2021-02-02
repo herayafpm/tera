@@ -34,6 +34,8 @@
               <th>Nama</th>
               <th>Tugas</th>
               <th>Dibuat Pada</th>
+              <th>Keterangan</th>
+              <th>Status</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -46,6 +48,8 @@
               <th>Nama</th>
               <th>Tugas</th>
               <th>Dibuat Pada</th>
+              <th>Keterangan</th>
+              <th>Status</th>
               <th>Aksi</th>
             </tr>
           </tfoot>
@@ -139,7 +143,7 @@
         [0, 'desc']
       ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
       'columnDefs': [{
-        "targets": [5],
+        "targets": [7],
         "orderable": false
       }],
       "ajax": {
@@ -181,7 +185,20 @@
           }
         },
         {
-          "render": function(data, type, row, meta) { // Tampilkan kolom aksi
+          "data": "admin_keterangan",
+        },
+        {
+          "data": "admin_status",
+          "render": function(dt, type, row, meta) { // Tampilkan kolom aksi
+            var html = 'Tidak Aktif'
+            if (row.admin_status == 1) {
+              html = 'Aktif'
+            }
+            return html
+          }
+        },
+        {
+          "render": function(dt, type, row, meta) { // Tampilkan kolom aksi
             var html = '<button type="button" class="btn btn-link text-warning" onClick="logAdmin(' + row.admin_id + ')"><i class="fa fa-fw fa-clock" aria-hidden="true" title="Riwayat Masuk ' + row.admin_nama + '"></i></button>'
             html += '<button type="button" class="btn btn-link text-info" onClick="ubah(' + row.admin_id + ')"><i class="fa fa-fw fa-edit" aria-hidden="true" title="Edit ' +
               row.admin_nama + '"></i></button>'

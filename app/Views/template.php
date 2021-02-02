@@ -52,6 +52,11 @@
           <nav class="nav-menu d-none d-lg-block">
             <ul>
               <li class="text-capitalize <?= ($_view == 'home') ? "active" : "" ?>"><a href="<?= base_url() ?>">Home</a></li>
+              <?php if (isset($_session->isLogin)) : ?>
+                <li class="text-capitalize <?= ($_view == 'user/tera/pendaftaran/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pendaftaran/riwayat') ?>">riwayat pendaftaran</a></li>
+                <li class="text-capitalize <?= ($_view == 'user/tera/pembayaran/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pembayaran/riwayat') ?>">riwayat pembayaran</a></li>
+                <li class="text-capitalize <?= ($_view == 'user/tera/pengujian/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pengujian/riwayat') ?>">riwayat pengujian</a></li>
+              <?php endif ?>
               <li class="text-capitalize <?= ($_view == 'auth/lupa_password') ? "active" : "" ?>"><a href="<?= base_url('auth/lupa_password') ?>">lupa password</a></li>
             </ul>
           </nav>
@@ -134,6 +139,8 @@
   <!-- Template Main JS File -->
   <script src="<?= base_url('') ?>/assets/vendor/presento/js/main.js"></script>
   <script src="<?= base_url('assets/vendor/adminlte') ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="<?= base_url('assets/vendor/moment/moment-with-locales.js') ?>"></script>
+
 
 
   <script>
@@ -148,7 +155,8 @@
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya'
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal'
         }).then((result) => {
           if (result.isConfirmed) {
             window.location = "<?= base_url('auth/logout') ?>"
@@ -156,6 +164,28 @@
         })
       }
     <?php endif ?>
+
+    function formatRupiah(angka, prefix) {
+      var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+      // tambahkan titik jika yang di input sudah menjadi angka ribuan
+      if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+      }
+
+      rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+      return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    }
+
+    function toLocaleDate(date, format = 'LL') {
+      moment.locale('id')
+      return moment(date).format(format)
+    }
 
     $(function() {
       Toast = Swal.mixin({

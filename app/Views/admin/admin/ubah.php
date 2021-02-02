@@ -36,6 +36,22 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="admin_keterangan" class="col-form-label">Keterangan</label>
+          <textarea class="form-control form-control-sm <?= ($_validation->hasError('admin_keterangan') ? "is-invalid" : "") ?>" id="admin_keterangan" rows="4" name="admin_keterangan" placeholder="Masukkan Keterangan (Opsional)"><?= old('admin_keterangan', $admin['admin_keterangan']) ?></textarea>
+          <div class="invalid-feedback">
+            <?= $_validation->getError('admin_keterangan') ?>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <input class="form-check-input" type="checkbox" value="1" id="admin_status" name="admin_status" <?= (old('admin_status', $admin['admin_status']) == 1) ? "checked" : "" ?>>
+          <label class="form-check-label" for="admin_status">
+            Aktif?
+          </label>
+          <div class="invalid-feedback">
+            <?= $_validation->getError('admin_status') ?>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="admin_password" class="col-form-label">Password</label>
           <input type="text" class="form-control col-sm-4 <?= ($_validation->hasError('admin_password') ? "is-invalid" : "") ?>" id="admin_password" name="admin_password" placeholder="Password Baru (Kosongi jika tidak ingin diubah)">
           <div class="invalid-feedback">

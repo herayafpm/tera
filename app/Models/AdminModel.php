@@ -11,7 +11,7 @@ class AdminModel extends Model
 
   protected $returnType     = 'array';
 
-  protected $allowedFields = ['admin_username', 'admin_nama', 'role_id', 'admin_password'];
+  protected $allowedFields = ['admin_username', 'admin_nama', 'role_id', 'admin_password', 'admin_keterangan', 'admin_status'];
 
   protected $useTimestamps = true;
   protected $createdField  = 'admin_created';

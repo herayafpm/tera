@@ -1,57 +1,75 @@
-# CodeIgniter 4 Framework
+# Tera Codeigniter 4
 
-## What is CodeIgniter?
+## Apa itu Tera?
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible, and secure. 
-More information can be found at the [official site](http://codeigniter.com).
+Tera adalah sebuah aplikasi untuk pendaftaran, pembayaran, dan pengujian Alat UTTP di Dinperindag.
 
-This repository holds the distributable version of the framework,
-including the user guide. It has been built from the 
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Fitur Super Admin
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+- Mengelola Admin
+- Mengelola User
+- Mengelola Aparatur
+- Mengelola Data Master
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/). 
+## Fitur Petugas Pendaftaran
 
+- Pendaftaran Tera Kantor / Luar Kantor
+- Melihat riwayat pendaftaran Tera Kantor / Luar Kantor dan Tempat Pakai
+- Pengajuan Tera Tempat Pakai
 
-## Important Change with index.php
+## Fitur Bendahara Penerimaan Pembantu
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- Pembayaran Retribusi Tera Kantor / Luar Kantor dan Tempat Pakai
+- SKRD
+- SSRD
+- SKRDKB
+- SKRDLB
+- Keringanan
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Fitur Pegawai Yang Berhak
 
-**Please** read the user guide for a better explanation of how CI4 works!
-The user guide updating and deployment is a bit awkward at the moment, but we are working on it!
+- Pengujian Jenis UTTP Tera yang sudah lunas / keringanan retribusi
+- Cetak Berita Acara
+- Cetak Hasil Pengujian 1
+- Cetak Hasil Pengujian 2
+- Cetak Hasil Pengujian 3
 
-## Repository Management
+## Fitur Petugas Loket
 
-We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- Riwayat Pengujian Jenis UTTP Tera yang sudah lunas / keringanan retribusi
+- Cetak Hasil Pengujian 1
+- Cetak Hasil Pengujian 2
+- Cetak Hasil Pengujian 3
 
-This repository is a "distribution" one, built by our release preparation script. 
-Problems with it can be raised on our forum, or as issues in the main repository.
+## Kebutuhan Server
 
-## Contributing
-
-We welcome contributions from the community.
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/contributing.md) section in the development repository.
-
-## Server Requirements
-
-PHP version 7.2 or higher is required, with the following extensions installed: 
+PHP versi 7.2 atau lebih tinggi, dengan extension yang sudah diinstall atau diaktifkan:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
 - json (enabled by default - don't turn it off)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
+
+Database defaultnya adalah PostgreSql, namun anda juga bisa mengubahnya ke Mysql, untuk lebih jelas silahkan lihat cara instalasinya
+
+## Instalasi
+
+1. Download repositori ini dan taruh di htdocs(Xampp) atau www (Laragon) atau webserver yang lain.
+2. Silahkan buka di vscode atau text editor yang lain
+3. untuk vs code silahkan klik ctrl+` (\`` diatas key tab).
+4. di terminal ketikkan _composer install_ untuk menginstall codeigniter 4 ke projek.
+5. rename file env menjadi .env dan ubah sesuai kebutuhan, untuk cara mengubahnya silahkan cari di google
+6. setelah disetting silahkan gunakkan perintah _php spark migrate:refresh_ untuk membuat table ke databasenya, dan _php spark db:seed InitSeeder_ untuk memasukkan data awal ke table yang telah dibuat
+7. selesai
+
+# Lisensi
+
+Cek link ini untuk melihat lisensi Codeigniter [Lisensi Codeigniter 4](https://github.com/codeigniter4/CodeIgniter4).
+
+# Resources
+
+- [Codeigniter User Guide](https://codeigniter.com/docs)
+
+Laporkan isu keamanan ke [Email kerentanan aplikasi](mailto:herayafpm@gmail.com)
+Terima kasih.

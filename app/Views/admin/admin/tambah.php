@@ -35,6 +35,22 @@
             <?= $_validation->getError('role_id') ?>
           </div>
         </div>
+        <div class="form-group">
+          <label for="admin_keterangan" class="col-form-label">Keterangan</label>
+          <textarea class="form-control form-control-sm <?= ($_validation->hasError('admin_keterangan') ? "is-invalid" : "") ?>" id="admin_keterangan" rows="4" name="admin_keterangan" placeholder="Masukkan Keterangan (Opsional)"><?= old('admin_keterangan') ?></textarea>
+          <div class="invalid-feedback">
+            <?= $_validation->getError('admin_keterangan') ?>
+          </div>
+        </div>
+        <div class="form-group form-check">
+          <input class="form-check-input" type="checkbox" value="1" id="admin_status" name="admin_status" <?= (old('admin_status') == 1) ? "checked" : "" ?>>
+          <label class="form-check-label" for="admin_status">
+            Aktif?
+          </label>
+          <div class="invalid-feedback">
+            <?= $_validation->getError('admin_status') ?>
+          </div>
+        </div>
         <button class="btn btn-primary py-2 px-3" type="submit">Simpan</button>
         <?= form_close() ?>
       </div>

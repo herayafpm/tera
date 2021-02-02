@@ -34,6 +34,15 @@ class Admin extends Migration
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 			],
+			'admin_keterangan'       => [
+				'type'           => 'TEXT',
+				'null'					=> true,
+			],
+			'admin_status'       => [
+				'type'           => 'INT',
+				'constraint'     => 11,
+				'default'					=> 1,
+			],
 			'admin_created'       => [
 				'type'           => 'TIMESTAMP',
 				'default' => date('Y-m-d H:i:s')

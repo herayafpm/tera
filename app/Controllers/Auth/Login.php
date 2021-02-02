@@ -5,6 +5,7 @@ namespace App\Controllers\Auth;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Models\AdminModel;
+use App\Models\TeraModel;
 
 class Login extends BaseController
 {
@@ -16,6 +17,7 @@ class Login extends BaseController
   }
   public function index()
   {
+    $teraModel = new TeraModel();
     $data['_session'] = $this->session;
     $data['_title'] = 'Masuk Aplikasi';
     $data['_view'] = 'auth/login';

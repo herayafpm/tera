@@ -41,6 +41,10 @@ class BaseController extends Controller
     $this->data['_admin'] = $request->admin;
     $this->data['uri'] = current_url(true);
     $this->data['_jenis_tempats'] = $request->jenisTempats ?? [];
+    $this->data['_pengajuan_statuses'] = $request->pengajuanStatuses ?? [];
+    $this->data['_pengujian_statuses'] = $request->pengujianStatuses ?? [];
+    $this->data['_tera_statuses'] = $request->teraStatuses ?? [];
+    $this->data['_tera_pembayaran_statuses'] = $request->teraPembayaranStatuses ?? [];
     $this->data['_session'] = $this->session;
     //--------------------------------------------------------------------
     // Preload any models, libraries, etc, here.

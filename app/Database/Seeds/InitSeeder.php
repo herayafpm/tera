@@ -19,5 +19,6 @@ class InitSeeder extends Seeder
     $this->call('JenisUttpSeeder');
     $this->call('JenisRetribusiTipeSeeder');
     $this->call('JenisRetribusiSeeder');
+    $this->call('JenisUttpRetribusiSeeder');
   }
 }

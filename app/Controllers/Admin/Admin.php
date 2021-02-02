@@ -88,6 +88,8 @@ class Admin extends BaseController
         'admin_nama' => htmlspecialchars($this->request->getPost('admin_nama')),
         'admin_username' => htmlspecialchars($this->request->getPost('admin_username')),
         'role_id' => htmlspecialchars($this->request->getPost('role_id')),
+        'admin_keterangan' => htmlspecialchars($this->request->getPost('admin_keterangan')),
+        'admin_status' => htmlspecialchars($this->request->getPost('admin_status') ?? 0),
       ];
       $this->form_validation->setRules($rule);
       if (!$this->form_validation->run($data)) {
@@ -163,6 +165,8 @@ class Admin extends BaseController
         'admin_username' => htmlspecialchars($this->request->getPost('admin_username')),
         'role_id' => htmlspecialchars($this->request->getPost('role_id')),
         'admin_password' => htmlspecialchars($this->request->getPost('admin_password')),
+        'admin_keterangan' => htmlspecialchars($this->request->getPost('admin_keterangan')),
+        'admin_status' => htmlspecialchars($this->request->getPost('admin_status') ?? 0),
       ];
       $this->form_validation->setRules($rule);
       if (!$this->form_validation->run($data)) {

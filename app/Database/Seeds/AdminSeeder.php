@@ -51,6 +51,38 @@ class AdminSeeder extends Seeder
 				'admin_created' => $date,
 				'admin_updated' => $date,
 			],
+			[
+				"admin_username" => "19681126 199603 1 006",
+				"admin_nama" => "Pegawai Yang Berhak 2",
+				"role_id" => 4,
+				'admin_password' => $password,
+				'admin_created' => $date,
+				'admin_updated' => $date,
+			],
+			[
+				"admin_username" => "19681127 199603 1 006",
+				"admin_nama" => "Pegawai Yang Berhak 3",
+				"role_id" => 4,
+				'admin_password' => $password,
+				'admin_created' => $date,
+				'admin_updated' => $date,
+			],
+			[
+				"admin_username" => "19681129 199603 1 006",
+				"admin_nama" => "Pegawai Yang Berhak 4",
+				"role_id" => 4,
+				'admin_password' => $password,
+				'admin_created' => $date,
+				'admin_updated' => $date,
+			],
+			[
+				"admin_username" => "19681130 199603 1 006",
+				"admin_nama" => "Pegawai Yang Berhak 5",
+				"role_id" => 4,
+				'admin_password' => $password,
+				'admin_created' => $date,
+				'admin_updated' => $date,
+			],
 		];
 		$this->db->table('admin')->insertBatch($initDatas);
 	}
