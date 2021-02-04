@@ -60,7 +60,7 @@ Database defaultnya adalah PostgreSql, namun anda juga bisa mengubahnya ke Mysql
 3. untuk vs code silahkan klik ctrl+` (\`` diatas key tab).
 4. di terminal ketikkan _composer install_ untuk menginstall codeigniter 4 ke projek.
 5. rename file env menjadi .env dan ubah sesuai kebutuhan, untuk cara mengubahnya silahkan cari di google
-6. setelah disetting silahkan gunakkan perintah _php spark migrate:refresh_ untuk membuat table ke databasenya, dan _php spark db:seed InitSeeder_ untuk memasukkan data awal ke table yang telah dibuat
+6. setelah disetting silahkan gunakkan perintah _php spark app:install_ untuk membuat table ke databasenya dan mengisi data awal
 7. selesai
 
 ## Akun
