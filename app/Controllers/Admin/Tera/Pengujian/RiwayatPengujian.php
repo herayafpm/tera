@@ -80,11 +80,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->where('tera_uttp_retribusi_id', $tera_uttp_retribusi_id)->set($updateData)->update();
     if ($update) {
       $this->session->setFlashdata('success', "Berhasil mensahkan pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal mensahkan pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function verif($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id, $tera_uttp_id)
   {
@@ -98,11 +97,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->update($tera_uttp_id, $updateData);
     if ($update) {
       $this->session->setFlashdata('success', "Berhasil mensahkan pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal mensahkan pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function batal($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id, $tera_uttp_id)
   {
@@ -115,11 +113,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->update($tera_uttp_id, $updateData);
     if ($update) {
       $this->session->setFlashdata('batal', "Berhasil membatalkan sah / batal pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal membatalkan sah / batal pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function batal_all($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id)
   {
@@ -132,11 +129,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->where('tera_uttp_retribusi_id', $tera_uttp_retribusi_id)->set($updateData)->update();
     if ($update) {
       $this->session->setFlashdata('batal', "Berhasil membatalkan sah / batal pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal membatalkan sah / batal pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function tolak($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id, $tera_uttp_id)
   {
@@ -150,11 +146,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->update($tera_uttp_id, $updateData);
     if ($update) {
       $this->session->setFlashdata('batal', "Berhasil membatalkan pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal membatalkan pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function tolak_all($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id)
   {
@@ -168,11 +163,10 @@ class RiwayatPengujian extends BaseController
     $update = $teraUttpModel->where('tera_uttp_retribusi_id', $tera_uttp_retribusi_id)->set($updateData)->update();
     if ($update) {
       $this->session->setFlashdata('batal', "Berhasil membatalkan pengujian");
-      return redirect()->back()->withInput();
     } else {
       $this->session->setFlashdata('error', "Gagal membatalkan pengujian");
-      return redirect()->back()->withInput();
     }
+    return redirect()->to(base_url("admin/tera/pengujian/{$jenis_tempat_id}/riwayat/{$status}/uji/{$tera_id}/{$tera_uttp_retribusi_id}"));
   }
   public function print_keterangan_pengganti($jenis_tempat_id, $status, $tera_id, $tera_uttp_retribusi_id, $tera_uttp_id)
   {

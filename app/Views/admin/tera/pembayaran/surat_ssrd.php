@@ -8,41 +8,69 @@
 </style>
 <?= $this->endSection('customcss') ?>
 <?= $this->section('content'); ?>
+<?= view("admin/components/header_surat") ?>
 <tr>
   <td align="center" style="padding: 20px 20px;" colspan="3">
-    <h4><b>SURAT SETORAN RETRIBUSI DAERAH</b></h4>
-    <h4><b>(SSRD)</b></h4>
+    <p style="font-size: 19px;"><b>SURAT SETORAN RETRIBUSI DAERAH</b></p>
+    <p style="font-size: 19px;"><b>(SSRD)</b></p>
   </td>
 </tr>
 <tr>
   <td align="right" style="padding: 0px 50px;" colspan="3">
     <table border="1" style="width: 200px;">
       <tr>
-        <td style="width: 70px;padding:5px">
+        <td style="width: 100px;padding:5px">
           <p>No Register : </p>
         </td>
         <td>
-          <p style="white-space: pre;"> <?= $_GET['no_register'] ?? "&#9;&#9;/&#9;/&#9;&#9;" ?></p>
+          <p style="white-space: pre;"> <?= $_GET['no_register'] ?? "&#9;/&#9;/&#9;" ?></p>
         </td>
       </tr>
     </table>
   </td>
 </tr>
 <tr>
-  <td style="padding: 0 20px 2px;" colspan="3">
+  <td style="padding: 5px 20px 5px;" colspan="3">
     <p>Telah terima dari</p>
   </td>
 </tr>
 <tr>
   <td style="padding: 0 20px;" colspan="3">
-    <p style="white-space:pre">Nama &#9;&#9;&#9;: <?= $tera['user_nama'] ?></p>
-    <p style="white-space:pre">Alamat &#9;&#9;&#9;: <?= $tera['user_alamat'] ?></p>
-    <p style="white-space:pre">Uang sebesar &#9;&#9;: <?= format_rupiah($tera_ssrd['tera_ssrd_uang']) ?></p>
-    <p style="white-space:pre">Terbilang &#9;&#9;: <?= $tera_ssrd['tera_ssrd_terbilang'] ?></p>
-    <p style="white-space:pre">Keterangan &#9;&#9;: Penerimaan Retribusi <?= $tera['jenis_tera_nama'] ?></p>
-    <p style="white-space:pre">Bank &#9;&#9;&#9;: <?= $tera_ssrd['tera_ssrd_bank'] ?></p>
-    <p style="white-space:pre">No Rekening &#9;&#9;: <?= $tera_ssrd['tera_ssrd_no_rek'] ?></p>
-    <br>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Nama</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera['user_nama'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Alamat</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera['user_alamat'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Uang sebesar</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= format_rupiah($tera_ssrd['tera_ssrd_uang']) ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Terbilang</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera_ssrd['tera_ssrd_terbilang'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Keterangan</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> Penerimaan Retribusi <?= $tera['jenis_tera_nama'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">Bank</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera_ssrd['tera_ssrd_bank'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 130px;">No Rekening</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera_ssrd['tera_ssrd_no_rek'] ?></div>
+    </div>
   </td>
 </tr>
 <tr>
@@ -50,15 +78,15 @@
     <table class="table">
       <thead>
         <tr style="text-align: center;">
-          <th rowspan="2">No</th>
-          <th rowspan="2" colspan="9">Kode Rekening</th>
-          <th colspan="3">Uraian Objek</th>
-          <th rowspan="2">Jumlah Retribusi (Rp)</th>
+          <td rowspan="2">No</td>
+          <td rowspan="2" colspan="9">Kode Rekening</td>
+          <td colspan="3">Uraian Objek</td>
+          <td style="padding: 5px;width:100px" rowspan="2">Jumlah Retribusi (Rp)</td>
         </tr>
         <tr style="text-align: center;">
-          <th>Jenis UTTP</th>
-          <th>Kap.</th>
-          <th>Jumlah</th>
+          <td>Jenis UTTP</td>
+          <td style="padding: 5px;">Kap.</td>
+          <td style="padding: 5px;">Jumlah</td>
         </tr>
       </thead>
       <tbody>
@@ -67,27 +95,27 @@
         $no = 0;
         foreach ($tera['tera_uttps'] as $tera_uttp) : ?>
           <tr style="text-align: center;">
-            <td><?= $no + 1 ?></td>
+            <td style="vertical-align:bottom;"><?= $no + 1 ?></td>
             <?php
             $kdRek = explode(".", $tera_ssrd['tera_ssrd_kd_rek']);
             ?>
-            <td style="width: 25px;"><?= $kdRek[0] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[1] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[2] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[3] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[4] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[5] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[6] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[7] ?? "-" ?></td>
-            <td style="width: 25px;"><?= $kdRek[8] ?? "-" ?></td>
-            <td><?= ($tera_uttp['jenis_uttp_tipe_id'] != null ? $tera_uttp['jenis_uttp_tipe_nama'] . " : " : "") . $tera_uttp['jenis_uttp_nama'] ?></td>
-            <td><?= format_rupiah($tera_uttp['tera_uttp_kapasitas']) ?></td>
-            <td><?= format_rupiah($tera_uttp['tera_uttp_jumlah']) ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[0] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[1] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[2] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[3] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[4] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[5] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[6] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[7] ?? "-" ?></td>
+            <td style="vertical-align:bottom;width: 25px;"><?= $kdRek[8] ?? "-" ?></td>
+            <td style="padding: 5px;"><?= ($tera_uttp['jenis_uttp_tipe_id'] != null ? $tera_uttp['jenis_uttp_tipe_nama'] . " : " : "") . $tera_uttp['jenis_uttp_nama'] ?></td>
+            <td style="padding: 5px;"><?= format_rupiah($tera_uttp['tera_uttp_kapasitas']) ?></td>
+            <td style="padding: 5px;"><?= format_rupiah($tera_uttp['tera_uttp_jumlah']) ?></td>
             <?php
             $jumlah_bayar = ((int) $tera_uttp['tera_uttp_retribusi'] * (int) $tera_uttp['tera_uttp_jumlah']) + $tera_uttp['tera_uttp_sanksi_adm'];
             $total_bayar += $jumlah_bayar;
             ?>
-            <td><?= format_rupiah($jumlah_bayar) ?></td>
+            <td style="padding: 5px;"><?= format_rupiah($jumlah_bayar) ?></td>
           </tr>
         <?php
           $no++;

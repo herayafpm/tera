@@ -22,6 +22,7 @@
           <h5>Filter</h5>
           <div class="form-group row">
             <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_order" placeholder="No order" /></div>
+            <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_pendaftaran" placeholder="No Pendaftaran" /></div>
             <div class="col-md-4">
               <select class="form-control form-control-sm" id="jenis_tera_id">
                 <option value="">--Pilih Jenis Pekerjaan--</option>
@@ -30,15 +31,14 @@
                 <?php endforeach; ?>
               </select>
             </div>
-            <div class="col-md-4">
-              <div id="daterange" class="form-control form-control-sm"><span class="date">Pilih Tanggal</span> <i class="fa fa-fw fa-calendar"></i>&nbsp;<span></span> <i class="fa fa-caret-down"></i></div>
-            </div>
           </div>
           <table id="datatable" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>No</th>
                 <th>No Order</th>
+                <th>No Pendaftaran</th>
+                <th>Jenis Tempat</th>
                 <th>Jenis Pekerjaan</th>
                 <th>Status</th>
                 <th>Tanggal</th>
@@ -51,6 +51,8 @@
               <tr>
                 <th>No</th>
                 <th>No Order</th>
+                <th>No Pendaftaran</th>
+                <th>Jenis Tempat</th>
                 <th>Jenis Pekerjaan</th>
                 <th>Status</th>
                 <th>Tanggal</th>
@@ -324,7 +326,7 @@
         [4, 'desc'],
       ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
       'columnDefs': [{
-        "targets": [5],
+        "targets": [7],
         "orderable": false
       }],
       "ajax": {
@@ -352,6 +354,10 @@
         }, {
           "data": "tera_no_order",
         }, {
+          "data": "tera_no_pendaftaran",
+        }, {
+          "data": "jenis_tempat_nama",
+        }, {
           "data": "jenis_tera_nama",
         }, {
           "data": "tera_status",
@@ -366,9 +372,9 @@
           }
         },
         {
-          "data": "tera_date_order",
+          "data": "tera_created",
           "render": function(data, type, row, meta) {
-            return toLocaleDate(row.tera_date_order)
+            return toLocaleDate(row.tera_created)
           }
         },
         {
@@ -395,47 +401,19 @@
         datas = json.data
       })
     })
+    $('#tera_no_pendaftaran').on('keyup change clear', function() {
+      var value = $(this).val();
+      data.tera_no_pendaftaran = value;
+      tabel.ajax.reload(null, function(data) {
+        datas = json.data
+      })
+    })
     $('#jenis_tera_id').on('change clear', function() {
       var value = $(this).val();
       data.jenis_tera_id = value;
       tabel.ajax.reload(null, function(data) {
         datas = json.data
       })
-    })
-    moment.locale('id')
-    start = moment();
-    end = moment();
-
-    function cb(start, end) {
-      data.date = start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D');
-      $('.date').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'))
-      tabel.ajax.reload(function(json) {
-        datas = json.data
-      })
-    }
-
-    $('#daterange').daterangepicker({
-      showDropdowns: true,
-      autoApply: false,
-      startDate: start,
-      endDate: end,
-      locale: {
-        customRangeLabel: 'Tentukan Sendiri',
-        cancelLabel: 'Batal',
-        applyLabel: 'Pilih',
-      },
-      ranges: {
-        'Hari ini': [moment(), moment()],
-        'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        '7 Hari terakhir': [moment().subtract(6, 'days'), moment()],
-        '30 Hari terakhir': [moment().subtract(29, 'days'), moment()],
-        'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
-        'Bulan sebelumnya': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      }
-    }, cb);
-    cb(start, end)
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-      cb(picker.startDate, picker.endDate)
     })
   });
 </script>

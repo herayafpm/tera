@@ -3,37 +3,44 @@
 (Bidang Metrologi)
 <?= $this->endSection('departement') ?>
 <?= $this->section('content'); ?>
+<?= view("admin/components/header_surat") ?>
 <tr>
   <td align="center" style="padding: 20px 20px;" colspan="3">
-    <h4><b>SURAT KETETAPAN RETRIBUSI DAERAH KURANG BAYAR</b></h4>
-    <h4><b>(SKRDKB)</b></h4>
+    <p style="font-size: 19px;"><b>SURAT KETETAPAN RETRIBUSI DAERAH KURANG BAYAR</b></p>
+    <p style="font-size: 19px;"><b>(SKRDKB)</b></p>
   </td>
 </tr>
 <tr>
-  <td style="padding: 0 50px;" colspan="3">
-    <p style="white-space:pre">1. Nama &#9;&#9;&#9;: <?= $tera['user_nama'] ?></p>
-    <br>
-    <p style="white-space:pre">2. Alamat &#9;&#9;: <?= $tera['user_alamat'] ?></p>
-    <br>
+  <td style="padding: 0 40px;" colspan="3">
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 100px;">Nama</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera['user_nama'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 100px;">Alamat</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera['user_alamat'] ?></div>
+    </div>
   </td>
 </tr>
 <tr>
-  <td style="padding: 5px 50px;" colspan="3">
+  <td style="padding: 5px 40px;" colspan="3">
     <table border="1">
       <thead>
         <tr style="text-align: center;">
-          <th>NOMOR</th>
-          <th>JENIS RETRIBUSI DAERAH</th>
-          <th>JUMLAH</th>
+          <td style="padding: 5px;">NOMOR</td>
+          <td>JENIS RETRIBUSI DAERAH</td>
+          <td>JUMLAH</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td align="center" style="vertical-align: top;">
+          <td align="center" style="vertical-align: top;width:60px">
             <p><?= $tera['tera_no_order'] ?></p>
           </td>
-          <td style="padding: 0 5px;">
-            <p style="text-transform: uppercase; text-align:center">
+          <td style="padding: 0 5px;width:270px">
+            <p style="text-transform: uppercase; text-align:center;font-size: 14px;margin-bottom: 5px;">
               KEKURANGAN PEMBAYARAN RETRIBUSI PELAYANAN <?= $tera['jenis_tera_nama'] ?>
             </p>
             <?php
@@ -44,7 +51,7 @@
               $no++;
             endforeach; ?>
           </td>
-          <td style="padding: 0 5px;">
+          <td style="padding: 5px 5px 0px; vertical-align: bottom; width:150px">
             <br>
             <?php
             foreach ($tera['count_retribusis'] as $count_retribusi) : ?>
@@ -61,12 +68,12 @@
         <tr>
           <td></td>
           <td style="padding: 0 5px;">Jumlah Kekurangan Retribusi</td>
-          <td style="padding: 0 5px;">Rp <?= ($_total_kurang_bayar < 0) ? 0 : $_total_kurang_bayar ?></td>
+          <td style="padding: 0 5px;">Rp <?= ($_total_kurang_bayar < 0) ? "" : $_total_kurang_bayar ?></td>
         </tr>
         <tr>
           <td></td>
           <td style="padding: 0 5px;">Jumlah Yang Harus Dibayar</td>
-          <td style="padding: 0 5px;">Rp <?= ($_total_kurang_bayar < 0) ? 0 : $_total_kurang_bayar ?></td>
+          <td style="padding: 0 5px;">Rp <?= ($_total_kurang_bayar < 0) ? "" : $_total_kurang_bayar ?></td>
         </tr>
         <tr>
           <td style="padding: 0 5px;" colspan="3">Dengan huruf: <?= $tera['tera_skrdkb_terbilang'] ?></td>
@@ -86,7 +93,7 @@
   <td style="padding: 5px 20px;">
 
   </td>
-  <td align="center" style="width:200px;padding: 20px 20px;">
+  <td align="center" style="width:300px;padding: 20px 50px;">
     <p>Purwokerto, <?= date('d - m - Y', strtotime($tera['tera_skrdkb_at'])) ?></p>
     <p>a.n KEPALA DINPERINDAG</p>
     <p>KAB. BANYUMAS</p>

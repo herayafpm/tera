@@ -75,6 +75,13 @@ class Pendaftaran extends BaseController
           'required' => '{field} tidak boleh kosong',
         ]
       ],
+      'user_telepon' => [
+        'label'  => 'No Telepon Wajib Tera',
+        'rules'  => 'required',
+        'errors' => [
+          'required' => '{field} tidak boleh kosong',
+        ]
+      ],
       'tera_no_order' => [
         'label'  => 'No Order',
         'rules'  => 'required',
@@ -146,6 +153,7 @@ class Pendaftaran extends BaseController
       'user_nik' => htmlspecialchars($this->request->getPost('user_nik')),
       'user_nama' => htmlspecialchars($this->request->getPost('user_nama')),
       'user_alamat' => htmlspecialchars($this->request->getPost('user_alamat')),
+      'user_telepon' => htmlspecialchars($this->request->getPost('user_telepon')),
       'tera_no_order' => htmlspecialchars($this->request->getPost('tera_no_order')),
       'jenis_tera_id' => htmlspecialchars($this->request->getPost('jenis_tera_id')),
       'tera_atas_nama' => htmlspecialchars($this->request->getPost('tera_atas_nama')),
@@ -165,11 +173,17 @@ class Pendaftaran extends BaseController
       $user = $userModel->findByNIK($data['user_nik']);
       if ($user) {
         $data['user_id'] = $user['user_id'];
+        $userModel->update($user['user_id'], [
+          'user_nama' => $data['user_nama'],
+          'user_alamat' => $data['user_alamat'],
+          'user_telepon' => $data['user_telepon'],
+        ]);
       } else {
         $userModel->save([
           'user_nik' => $data['user_nik'],
           'user_nama' => $data['user_nama'],
           'user_alamat' => $data['user_alamat'],
+          'user_telepon' => $data['user_telepon'],
           'user_password' => env("passwordDefault"),
         ]);
         $data['user_id'] = $userModel->InsertID();

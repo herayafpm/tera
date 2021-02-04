@@ -39,6 +39,45 @@ class TeraUttpRetribusiModel extends Model
       }
     }
     $datas = $builder->get()->getResultArray();
+    $no = 0;
+    $teraUttpModel = new TeraUttpModel();
+    foreach ($datas as $data) {
+      $datas[$no]['proses'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 0);
+      $datas[$no]['sah'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 1);
+      $datas[$no]['batal'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 2);
+      $no++;
+    }
+    return $datas; // Eksekusi query sql sesuai kondisi diatas
+  }
+  public function getPengujianCount($params = [])
+  {
+    $builder = $this->db->table($this->table);
+    $builder->select("{$this->table}.*");
+    $builder->select("jenis_uttp.*");
+    $builder->select("jenis_uttp_tipe.*");
+    $builder->select("jenis_retribusi.*");
+    $builder->select("jenis_retribusi_tipe.*");
+    $builder->join('jenis_uttp', "jenis_uttp.jenis_uttp_id = {$this->table}.jenis_uttp_id", 'LEFT');
+    $builder->join('jenis_uttp_tipe', "jenis_uttp_tipe.jenis_uttp_tipe_id = jenis_uttp.jenis_uttp_tipe_id", 'LEFT');
+    $builder->join('jenis_retribusi', "jenis_retribusi.jenis_retribusi_id = {$this->table}.jenis_retribusi_id", 'LEFT');
+    $builder->join('jenis_retribusi_tipe', "jenis_retribusi_tipe.jenis_retribusi_tipe_id = jenis_retribusi.jenis_retribusi_tipe_id", 'LEFT');
+    if (isset($params['where'])) {
+      $builder->where($params['where']);
+    }
+    if (isset($params['like'])) {
+      foreach ($params['like'] as $key => $value) {
+        $builder->like($key, $value);
+      }
+    }
+    $datas = $builder->get()->getResultArray();
+    $no = 0;
+    $teraUttpModel = new TeraUttpModel();
+    foreach ($datas as $data) {
+      $datas[$no]['proses'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 0);
+      $datas[$no]['sah'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 1);
+      $datas[$no]['batal'] = $teraUttpModel->getCountTeraUttpStatus($data['tera_uttp_retribusi_id'], 2);
+      $no++;
+    }
     return $datas; // Eksekusi query sql sesuai kondisi diatas
   }
   public function getTeraUttp($tera_uttp_retribusi_id)

@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Controllers\User\Tera\Pendaftaran;
+namespace App\Controllers\User\Tera\Pembayaran;
 
 use App\Controllers\User\BaseController;
 use App\Models\JenisTeraModel;
 use App\Models\TeraModel;
-use CodeIgniter\HTTP\Request;
 
 class Riwayat extends BaseController
 {
   public function index()
   {
-    $data['_view'] = 'user/tera/pendaftaran/riwayat/index';
+    $data['_view'] = 'user/tera/pembayaran/riwayat/index';
     $data = array_merge($data, $this->data);
-    $data['_title'] = "Riwayat Pendaftaran Tera";
-    $data['_uri_datatable'] = base_url("user/tera/pendaftaran/riwayat/datatable");
+    $data['_title'] = "Riwayat Pembayaran Tera";
+    $data['_uri_datatable'] = base_url("user/tera/pembayaran/riwayat/datatable");
     $data['_scroll_datatable'] = "350px";
     $jenisTeraModel = new JenisTeraModel();
     $data['_jenis_teras'] = $jenisTeraModel->findAll();
@@ -25,11 +24,13 @@ class Riwayat extends BaseController
     $method = $this->request->getMethod();
     if ($method == 'post') {
       $teraModel = new TeraModel();
-      $user = $this->request->user;
-      $where = ['tera.user_id' => $user->user_id];
+      $where = [];
       $like = null;
       if (!empty($this->request->getPost('jenis_tera_id'))) {
         $where['tera.jenis_tera_id'] = htmlspecialchars($this->request->getPost('jenis_tera_id'));
+      }
+      if (!empty($this->request->getPost('user_nik'))) {
+        $where['user.user_nik'] = htmlspecialchars($this->request->getPost('user_nik'));
       }
       if (!empty($this->request->getPost('tera_no_order'))) {
         $like['tera.tera_no_order'] = htmlspecialchars($this->request->getPost('tera_no_order'));

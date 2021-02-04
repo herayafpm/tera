@@ -112,6 +112,7 @@ class Riwayat extends BaseController
     $data['_title'] = "Print Surat Tugas";
     $data['tera_pengajuan'] = $teraPengajuan;
     $data['tera'] = $teraPengajuan['tera'];
+    $data['petugass'] = $teraPengajuan['petugas'];
     return view($data['_view'], $data);
   }
 }

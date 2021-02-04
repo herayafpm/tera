@@ -44,6 +44,15 @@
           </div>
         </div>
         <div class="form-group row">
+          <label for="user_telepon" class="col-sm-2 col-form-label">No Telepon Wajib Tera</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('user_telepon') ? "is-invalid" : "") ?>" id="user_telepon" name="user_telepon" placeholder="Masukkan No Telepon Wajib Tera" value="<?= old('user_telepon') ?>">
+            <div class="invalid-feedback">
+              <?= $_validation->getError('user_telepon') ?>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
           <label for="tera_no_order" class="col-sm-2 col-form-label">No Order</label>
           <div class="col-sm-4">
             <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_no_order') ? "is-invalid" : "") ?>" id="tera_no_order" name="tera_no_order" placeholder="Masukkan No Order" value="<?= old('tera_no_order') ?>">
@@ -277,6 +286,7 @@
             $('#user_nama').val(json.data.user_nama)
             $('#tera_atas_nama').val(json.data.user_nama)
             $('#user_alamat').val(json.data.user_alamat)
+            $('#user_telepon').val(json.data.user_telepon)
             $('#tera_atas_nama_alamat').val(json.data.user_alamat)
           })
       }

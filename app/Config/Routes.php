@@ -31,9 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', function () {
-	return redirect()->to(base_url('auth/login'));
-});
+$routes->get('/', "Home::index");
 $routes->group('auth', ['namespace' => '\App\Controllers\Auth'], function ($routes) {
 	$routes->get('login', 'Login::index');
 	$routes->post('login', 'Login::index');
@@ -297,6 +295,7 @@ $routes->group('admin', ['filter' => 'auth_admin', 'namespace' => '\App\Controll
 				$routes->get('(:num)', 'Pengujian::index/$1/$2/$3');
 				$routes->group('(:num)/(:num)', function ($routes) {
 					$routes->get('print_berita_acara', 'Pengujian::print_berita_acara/$1/$2/$3/$4');
+					$routes->get('print_hasil_pengujian', 'Pengujian::print_hasil_pengujian/$1/$2/$3/$4');
 					$routes->get('', 'RiwayatPengujian::index/$1/$2/$3/$4');
 					$routes->post('datatable', 'RiwayatPengujian::datatable/$1/$2/$3/$4');
 					$routes->get('verif/(:num)', 'RiwayatPengujian::verif/$1/$2/$3/$4/$5');
@@ -324,6 +323,18 @@ $routes->group('admin', ['filter' => 'auth_admin', 'namespace' => '\App\Controll
 $routes->group('user', ['filter' => 'auth_user', 'namespace' => '\App\Controllers\User'], function ($routes) {
 	$routes->group('tera', ['filter' => 'auth_user', 'namespace' => '\App\Controllers\User\Tera'], function ($routes) {
 		$routes->group('pendaftaran', ['filter' => 'auth_user', 'namespace' => '\App\Controllers\User\Tera\Pendaftaran'], function ($routes) {
+			$routes->group('riwayat', function ($routes) {
+				$routes->get('', 'Riwayat::index');
+				$routes->post('datatable', 'Riwayat::datatable');
+			});
+		});
+		$routes->group('pembayaran', ['filter' => 'auth_user', 'namespace' => '\App\Controllers\User\Tera\Pembayaran'], function ($routes) {
+			$routes->group('riwayat', function ($routes) {
+				$routes->get('', 'Riwayat::index');
+				$routes->post('datatable', 'Riwayat::datatable');
+			});
+		});
+		$routes->group('pengujian', ['filter' => 'auth_user', 'namespace' => '\App\Controllers\User\Tera\Pengujian'], function ($routes) {
 			$routes->group('riwayat', function ($routes) {
 				$routes->get('', 'Riwayat::index');
 				$routes->post('datatable', 'Riwayat::datatable');

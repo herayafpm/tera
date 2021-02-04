@@ -10,11 +10,7 @@
 
 <body>
   <div id="body">
-    <table>
-      <tbody>
-        <?php $this->renderSection('content') ?>
-      </tbody>
-    </table>
+    <?php $this->renderSection('content') ?>
   </div>
   <script>
     window.print()

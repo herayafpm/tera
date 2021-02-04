@@ -73,6 +73,13 @@ class Pengajuan extends BaseController
           'required' => '{field} tidak boleh kosong',
         ]
       ],
+      'user_telepon' => [
+        'label'  => 'No Telepon Wajib Tera',
+        'rules'  => 'required',
+        'errors' => [
+          'required' => '{field} tidak boleh kosong',
+        ]
+      ],
       'tera_pengajuan_keterangan' => [
         'label'  => 'Keterangan',
         'rules'  => 'required',
@@ -166,6 +173,7 @@ class Pengajuan extends BaseController
       'user_nik' => htmlspecialchars($this->request->getPost('user_nik')),
       'user_nama' => htmlspecialchars($this->request->getPost('user_nama')),
       'user_alamat' => htmlspecialchars($this->request->getPost('user_alamat')),
+      'user_telepon' => htmlspecialchars($this->request->getPost('user_telepon')),
       'tera_pengajuan_keterangan' => $this->request->getPost('tera_pengajuan_keterangan'),
       'tera_pengajuan_date_order' => htmlspecialchars($this->request->getPost('tera_pengajuan_date_order')),
       'tera_no_order' => htmlspecialchars($this->request->getPost('tera_no_order')),
@@ -187,11 +195,17 @@ class Pengajuan extends BaseController
       $user = $userModel->findByNIK($data['user_nik']);
       if ($user) {
         $data['user_id'] = $user['user_id'];
+        $userModel->update($user['user_id'], [
+          'user_nama' => $data['user_nama'],
+          'user_alamat' => $data['user_alamat'],
+          'user_telepon' => $data['user_telepon'],
+        ]);
       } else {
         $userModel->save([
           'user_nik' => $data['user_nik'],
           'user_nama' => $data['user_nama'],
           'user_alamat' => $data['user_alamat'],
+          'user_telepon' => $data['user_telepon'],
           'user_password' => env("passwordDefault"),
         ]);
         $data['user_id'] = $userModel->InsertID();
@@ -199,6 +213,7 @@ class Pengajuan extends BaseController
       unset($data['user_nik']);
       unset($data['user_nama']);
       unset($data['user_alamat']);
+      unset($data['user_telepon']);
       $admin = $this->data['_admin'];
       $data['tera_pengajuan_status'] = 1;
       $data['tera_pengajuan_status_by'] = $admin->admin_id;

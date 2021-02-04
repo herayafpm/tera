@@ -101,6 +101,7 @@ class PelunasanSsrd extends BaseController
         if ((int) $data['tera_ssrd_uang'] >= (int) $_total_kurang_bayar && (int) $_total_kurang_bayar != 0) {
           $teraModel->update($tera['tera_id'], ['tera_status_bayar' => 1]);
           $teraSsrdModel->where(['tera_id' => $tera['tera_id'], 'tera_ssrd_status' => 0])->set(['tera_ssrd_status' => 2, 'tera_ssrd_status_by' => $admin->admin_id, 'tera_ssrd_status_at' => date('Y-m-d H:i:s')])->update();
+          return redirect()->to(base_url("admin/tera/pembayaran/{$jenis_tempat_id}/ssrd/1/{$tera['tera_id']}"));
         }
         return redirect()->to(base_url("admin/tera/pembayaran/{$jenis_tempat_id}/ssrd/{$status}/{$tera['tera_id']}"));
       } else {

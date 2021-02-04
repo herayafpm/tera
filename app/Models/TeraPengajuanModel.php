@@ -61,7 +61,9 @@ class TeraPengajuanModel extends Model
     $builder->where([$this->primaryKey => $id]);
     $datas = $builder->get()->getRowArray();
     $teraModel = new TeraModel();
+    $teraPetugasModel = new TeraPetugasModel();
     $datas['tera'] = $teraModel->getTera($datas['tera_id']);
+    $datas['petugas'] = $teraPetugasModel->filter(0, 0, 'tera_petugas_id', 'asc', []);
     return $datas; // Eksekusi query sql sesuai kondisi diatas
   }
   public function count_all($params = [])

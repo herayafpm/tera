@@ -1,4 +1,4 @@
-<?= $this->extend('admin/template'); ?>
+<?= $this->extend('template'); ?>
 <?= $this->section('customcss'); ?>
 <!-- DataTables -->
 <link rel="stylesheet" href="<?= base_url('assets/vendor/adminlte') ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -9,66 +9,71 @@
 
 <?= $this->endSection('customcss'); ?>
 <?= $this->section('content'); ?>
-<div class="row">
-  <div class="col-12">
-    <div class="card">
-      <!-- /.card-header -->
-      <div class="card-body">
-        <h5>Filter</h5>
-        <div class="form-group row">
-          <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_pendaftaran" placeholder="No pendaftaran" /></div>
-          <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_order" placeholder="No order" /></div>
-          <div class="col-md-4"><input data-inputmask="'mask': '9', 'repeat': 16, 'greedy' : false" class="form-control form-control-sm" type="text" id="user_nik" placeholder="NIK" /></div>
-          <div class="col-md-4">
-            <select class="form-control form-control-sm" id="jenis_tera_id">
-              <option value="">--Pilih Jenis Pekerjaan--</option>
-              <?php foreach ($_jenis_teras as $jenis_tera) : ?>
-                <option value="<?= $jenis_tera['jenis_tera_id'] ?>"><?= $jenis_tera['jenis_tera_nama'] ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="col-md-4">
-            <div id="daterange" class="form-control form-control-sm"><span class="date">Pilih Tanggal</span> <i class="fa fa-fw fa-calendar"></i>&nbsp;<span></span> <i class="fa fa-caret-down"></i></div>
-          </div>
-        </div>
-        <table id="datatable" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>No Pendaftaran</th>
-              <th>No Order</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Jenis Pekerjaan</th>
-              <th>Status</th>
-              <th>Tanggal</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>No</th>
-              <th>No Pendaftaran</th>
-              <th>No Order</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Jenis Pekerjaan</th>
-              <th>Status</th>
-              <th>Tanggal</th>
-              <th>Aksi</th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <!-- /.card-body -->
-    </div>
-    <!-- /.card -->
+<div class="container auth-section" data-aos="fade-up">
+  <div class="section-title">
+    <h2><?= $_title ?></h2>
+    <p><?= env("app.appName") ?></p>
   </div>
-  <!-- /.col -->
+  <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+    <div class="col-lg-12">
+      <div class="card">
+        <!-- /.card-header -->
+        <div class="card-body">
+          <h5>Filter</h5>
+          <div class="form-group row">
+            <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_order" placeholder="No order" /></div>
+            <div class="col-md-4 mb-1"><input class="form-control form-control-sm" type="text" id="tera_no_pendaftaran" placeholder="No Pendaftaran" /></div>
+            <div class="col-md-4">
+              <select class="form-control form-control-sm" id="jenis_tera_id">
+                <option value="">--Pilih Jenis Pekerjaan--</option>
+                <?php foreach ($_jenis_teras as $jenis_tera) : ?>
+                  <option value="<?= $jenis_tera['jenis_tera_id'] ?>"><?= $jenis_tera['jenis_tera_nama'] ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
+          <table id="datatable" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>No Order</th>
+                <th>No Pendaftaran</th>
+                <th>Jenis Pekerjaan</th>
+                <th>Jenis Tempat</th>
+                <th>Ketetapan Retribusi</th>
+                <th>Keringanan</th>
+                <th>Status Pembayaran</th>
+                <th>Total Retribusi</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>No</th>
+                <th>No Order</th>
+                <th>No Pendaftaran</th>
+                <th>Jenis Pekerjaan</th>
+                <th>Jenis Tempat</th>
+                <th>Ketetapan Retribusi</th>
+                <th>Keringanan</th>
+                <th>Status Pembayaran</th>
+                <th>Total Retribusi</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+
+  </div>
+
 </div>
-<!-- /.row -->
 <div class="modal fade" id="detailTeraModal" tabindex="-1" role="dialog" aria-labelledby="detailTeraModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -79,14 +84,6 @@
         </button>
       </div>
       <div class="modal-body" data-id="">
-        <div class="row">
-          <div class="col-4">
-            No Pendaftaran
-          </div>
-          <div class="col">
-            : <span class="tera_no_pendaftaran"></span>
-          </div>
-        </div>
         <div class="row tera_no_order_row">
           <div class="col-4">
             No Order
@@ -196,9 +193,10 @@
                 <th>Jenis UTTP</th>
                 <th>Kapasitas / Daya Baca</th>
                 <th>Jumlah</th>
-                <th>Proses</th>
-                <th>Sah</th>
-                <th>Batal</th>
+                <th>Retribusi</th>
+                <th>Keringanan</th>
+                <th>Sanksi Administrasi</th>
+                <th>Jumlah Retribusi</th>
               </thead>
               <tbody class="tbody-jenis_uttps">
               </tbody>
@@ -241,8 +239,7 @@
     $('.tera_no_order_row').addClass('d-none');
     $('.tera_status_verif_row').addClass('d-none');
     $('.tera_status_tolak_row').addClass('d-none');
-    $('.tera_no_pendaftaran').html(tera.tera_no_pendaftaran);
-    if (tera.tera_status == 1 && tera.tera_no_order != null) {
+    if (tera.tera_status >= 1 && tera.tera_no_order != null) {
       $('.tera_no_order_row').removeClass('d-none');
       $('.tera_no_order').html(tera.tera_no_order);
     }
@@ -272,6 +269,7 @@
     $('.tbody-jenis_uttps').html("")
     var tbody = ""
     tera.tera_uttps.forEach((item, index) => {
+      var total_retribusi = (parseInt(item.tera_uttp_retribusi) * parseInt(item.tera_uttp_jumlah) - parseInt(item.tera_uttp_keringanan)) + parseInt(item.tera_uttp_sanksi_adm)
       tbody += "<tr>"
       tbody += "<td>"
       tbody += index + 1
@@ -288,13 +286,16 @@
       tbody += formatRupiah(item.tera_uttp_jumlah)
       tbody += "</td>"
       tbody += "<td>"
-      tbody += formatRupiah("" + item.proses)
+      tbody += formatRupiah(item.tera_uttp_retribusi)
       tbody += "</td>"
       tbody += "<td>"
-      tbody += formatRupiah("" + item.sah)
+      tbody += formatRupiah(item.tera_uttp_keringanan)
       tbody += "</td>"
       tbody += "<td>"
-      tbody += formatRupiah("" + item.batal)
+      tbody += formatRupiah(item.tera_uttp_sanksi_adm)
+      tbody += "</td>"
+      tbody += "<td>"
+      tbody += formatRupiah("" + total_retribusi)
       tbody += "</td>"
       tbody += "</tr>"
     })
@@ -302,9 +303,6 @@
     $('#detailTeraModal').modal()
   }
 
-  function pengujian(id) {
-    window.location.href = "<?= $_uji ?>/" + id;
-  }
   $(function() {
     $(":input").inputmask();
     tabel = $("#datatable").DataTable({
@@ -349,17 +347,17 @@
       "serverSide": true,
       "ordering": true, // Set true agar bisa di sorting
       "order": [
-        [7, 'desc'],
+        [9, 'desc'],
       ], // Default sortingnya berdasarkan kolom / field ke 0 (paling pertama)
       'columnDefs': [{
-        "targets": [8],
+        "targets": [10],
         "orderable": false
       }, {
-        "targets": [5],
+        "targets": [3, 4],
         "visible": false
       }],
       "rowGroup": {
-        "dataSrc": 'jenis_tera_nama'
+        "dataSrc": ['jenis_tera_nama', 'jenis_tempat_nama']
       },
       "ajax": {
         "url": "<?= $_uri_datatable ?>", // URL file untuk proses select datanya
@@ -384,25 +382,49 @@
       "columns": [{
           "data": "tera_id",
         }, {
-          "data": "tera_no_pendaftaran",
-        }, {
           "data": "tera_no_order",
         }, {
-          "data": "user_nama",
-        }, {
-          "data": "user_alamat",
+          "data": "tera_no_pendaftaran",
         }, {
           "data": "jenis_tera_nama",
         }, {
-          "data": "tera_status",
+          "data": "jenis_tempat_nama",
+        }, {
+          "data": "tera_ketetapan_at",
+          "render": function(data, type, row, meta) { // Tampilkan kolom aksi
+            if (row.tera_ketetapan_at == null) {
+              return "Belum ditetapkan SKRD";
+            } else {
+              return toLocaleDate(row.tera_ketetapan_at, 'LL')
+            }
+          }
+        }, {
+          "data": "tera_keringanan_at",
+          "render": function(data, type, row, meta) { // Tampilkan kolom aksi
+            if (row.tera_keringanan_at == null) {
+              return "Tidak mengajukan Keringanan";
+            } else {
+              return toLocaleDate(row.tera_keringanan_at, 'LL')
+            }
+          }
+        }, {
+          "data": "tera_status_bayar",
           "render": function(data, type, row, meta) {
-            var status = "Proses"
-            if (row.tera_status == 1) {
-              status = "Diverif Oleh " + row.admin_nama
-            } else if (row.tera_status == 2) {
-              status = "Ditolak Oleh " + row.admin_nama
+            var status = '<span class="text-danger"><i class="nav-icon fas fa-times"></i> Belum</span>'
+            if (row.tera_status_bayar == 1) {
+              status = '<span class="text-success"><i class="nav-icon fas fa-check"></i> Lunas</span>'
+            } else if (row.tera_status_bayar == 2) {
+              status = '<span class="text-warning"><i class="nav-icon fas fa-money-check"></i> Keringanan</span>'
             }
             return status;
+          }
+        }, {
+          "render": function(data, type, row, meta) {
+            var total_retribusi = 0;
+            row.tera_uttps.forEach((element) => {
+              total_retribusi += (parseInt(element.tera_uttp_retribusi) * parseInt(element.tera_uttp_jumlah) - parseInt(element.tera_uttp_keringanan)) + parseInt(element.tera_uttp_sanksi_adm)
+            });
+            return formatRupiah("" + total_retribusi)
           }
         }, {
           "data": "tera_created",
@@ -413,7 +435,6 @@
         {
           "render": function(data, type, row, meta) { // Tampilkan kolom aksi
             var html = '<button type="button" class="btn btn-link text-info" onClick="detail(' + meta.row + ')"><i class="fa fa-fw fa-eye" aria-hidden="true" title="Detail"></i></button>'
-            html += '<button type="button" class="btn btn-link text-info" onClick="pengujian(' + row.tera_id + ')">Pengujian</button>'
             return html
           }
         },
@@ -428,31 +449,16 @@
         cell.innerHTML = i + 1;
       });
     }).draw();
-    $('#user_nik').on('keyup change clear', function() {
+    $('#tera_no_order').on('keyup change clear', function() {
       var value = $(this).val();
-      var min_karakter = 16;
-      if (value.length >= min_karakter) {
-        data.user_nik = value;
-      }
-      if (value.length == 0 && value.length < min_karakter) {
-        data.user_nik = "";
-      }
-      if (value.length >= min_karakter || value.length == 0) {
-        tabel.ajax.reload(null, function(data) {
-          datas = json.data
-        })
-      }
-    })
-    $('#tera_no_pendaftaran').on('keyup change clear', function() {
-      var value = $(this).val();
-      data.tera_no_pendaftaran = value;
+      data.tera_no_order = value;
       tabel.ajax.reload(null, function(data) {
         datas = json.data
       })
     })
-    $('#tera_no_order').on('keyup change clear', function() {
+    $('#tera_no_pendaftaran').on('keyup change clear', function() {
       var value = $(this).val();
-      data.tera_no_order = value;
+      data.tera_no_pendaftaran = value;
       tabel.ajax.reload(null, function(data) {
         datas = json.data
       })
@@ -463,41 +469,6 @@
       tabel.ajax.reload(null, function(data) {
         datas = json.data
       })
-    })
-    moment.locale('id')
-    start = moment();
-    end = moment();
-
-    function cb(start, end) {
-      data.date = start.format('YYYY-MM-D') + '/' + end.format('YYYY-MM-D');
-      $('.date').html(start.format('D MMMM, YYYY') + ' - ' + end.format('D MMMM, YYYY'))
-      tabel.ajax.reload(function(json) {
-        datas = json.data
-      })
-    }
-
-    $('#daterange').daterangepicker({
-      showDropdowns: true,
-      autoApply: false,
-      startDate: start,
-      endDate: end,
-      locale: {
-        customRangeLabel: 'Tentukan Sendiri',
-        cancelLabel: 'Batal',
-        applyLabel: 'Pilih',
-      },
-      ranges: {
-        'Hari ini': [moment(), moment()],
-        'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        '7 Hari terakhir': [moment().subtract(6, 'days'), moment()],
-        '30 Hari terakhir': [moment().subtract(29, 'days'), moment()],
-        'Bulan ini': [moment().startOf('month'), moment().endOf('month')],
-        'Bulan sebelumnya': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      }
-    }, cb);
-    cb(start, end)
-    $('#daterange').on('apply.daterangepicker', function(ev, picker) {
-      cb(picker.startDate, picker.endDate)
     })
   });
 </script>

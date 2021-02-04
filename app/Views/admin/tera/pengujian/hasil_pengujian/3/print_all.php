@@ -1,13 +1,3 @@
-<?= $this->extend('admin/template_surat'); ?>
-<?= $this->section('customcss') ?>
-<style>
-  .table td:not([class^="border-none"]) {
-    border: 1px solid #000;
-    border-collapse: collapse;
-  }
-</style>
-<?= $this->endSection('customcss') ?>
-<?= $this->section('content'); ?>
 <?= view("admin/components/header_surat") ?>
 
 <tr>
@@ -144,4 +134,3 @@
     Dilarang menggandakan sebagian isi Surat Keterangan ini tanpa seijin dari Bidang Metrologi Dinperindag Kab. Banyumas
   </td>
 </tr>
-<?= $this->endSection('content'); ?>

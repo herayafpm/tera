@@ -17,7 +17,6 @@ class Login extends BaseController
   }
   public function index()
   {
-    $teraModel = new TeraModel();
     $data['_session'] = $this->session;
     $data['_title'] = 'Masuk Aplikasi';
     $data['_view'] = 'auth/login';

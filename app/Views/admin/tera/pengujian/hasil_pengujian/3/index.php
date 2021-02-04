@@ -8,16 +8,34 @@
       <div class="card-body">
         <?= form_open() ?>
         <div class="form-group row">
-          <label for="tera_uttp_merk" class="col-sm-2 col-form-label">Merk / Type / Nomor Seri</label>
+          <label for="tera_uttp_merk" class="col-sm-3 col-form-label">Merk</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_merk') ? "is-invalid" : "") ?>" id="tera_uttp_merk" name="tera_uttp_merk" placeholder="Masukkan Merk / Type / Nomor Seri" value="<?= old('tera_uttp_merk', $_tera_uttp['tera_uttp_merk']) ?>">
+            <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_merk') ? "is-invalid" : "") ?>" id="tera_uttp_merk" name="tera_uttp_merk" placeholder="Masukkan Merk" value="<?= old('tera_uttp_merk', $_tera_uttp['tera_uttp_merk']) ?>">
             <div class="invalid-feedback">
               <?= $_validation->getError('tera_uttp_merk') ?>
             </div>
           </div>
         </div>
         <div class="form-group row">
-          <label for="tera_uttp_merk_kendaraan" class="col-sm-2 col-form-label">Merk Kendaraan</label>
+          <label for="tera_uttp_tipe" class="col-sm-3 col-form-label">Type</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_tipe') ? "is-invalid" : "") ?>" id="tera_uttp_tipe" name="tera_uttp_tipe" placeholder="Masukkan Type" value="<?= old('tera_uttp_tipe', $_tera_uttp['tera_uttp_tipe']) ?>">
+            <div class="invalid-feedback">
+              <?= $_validation->getError('tera_uttp_tipe') ?>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="tera_uttp_no_seri" class="col-sm-3 col-form-label">Nomor Seri</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_no_seri') ? "is-invalid" : "") ?>" id="tera_uttp_no_seri" name="tera_uttp_no_seri" placeholder="Masukkan Nomor Seri" value="<?= old('tera_uttp_no_seri', $_tera_uttp['tera_uttp_no_seri']) ?>">
+            <div class="invalid-feedback">
+              <?= $_validation->getError('tera_uttp_no_seri') ?>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="tera_uttp_merk_kendaraan" class="col-sm-3 col-form-label">Merk Kendaraan</label>
           <div class="col-sm-4">
             <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_merk_kendaraan') ? "is-invalid" : "") ?>" id="tera_uttp_merk_kendaraan" name="tera_uttp_merk_kendaraan" placeholder="Masukkan Merk Kendaraan" value="<?= old('tera_uttp_merk_kendaraan', $_tera_uttp['tera_uttp_merk_kendaraan']) ?>">
             <div class="invalid-feedback">
@@ -26,11 +44,20 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="tera_uttp_no_polisi" class="col-sm-2 col-form-label">No. Polisi dan No. Lambung</label>
+          <label for="tera_uttp_no_polisi" class="col-sm-3 col-form-label">No. Polisi dan No. Lambung</label>
           <div class="col-sm-4">
             <input type="text" class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_no_polisi') ? "is-invalid" : "") ?>" id="tera_uttp_no_polisi" name="tera_uttp_no_polisi" placeholder="Masukkan No. Polisi dan No. Lambung" value="<?= old('tera_uttp_no_polisi', $_tera_uttp['tera_uttp_no_polisi']) ?>">
             <div class="invalid-feedback">
               <?= $_validation->getError('tera_uttp_no_polisi') ?>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="tera_uttp_keterangan" class="col-sm-3 col-form-label">Keterangan / Media (Opsional)</label>
+          <div class="col-sm-9">
+            <textarea class="form-control form-control-sm <?= ($_validation->hasError('tera_uttp_keterangan') ? "is-invalid" : "") ?>" id="tera_uttp_keterangan" rows="4" name="tera_uttp_keterangan" placeholder="Masukkan Keterangan / Media (Opsional)"><?= old('tera_uttp_keterangan', $_tera_uttp['tera_uttp_keterangan']) ?></textarea>
+            <div class="invalid-feedback">
+              <?= $_validation->getError('tera_uttp_keterangan') ?>
             </div>
           </div>
         </div>

@@ -217,7 +217,7 @@
                     }
                     ?>
                     <li class="nav-item">
-                      <a href="<?= base_url("admin/tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/${no}") ?>" class="nav-link <?= (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) ? "active" : "" ?>">
+                      <a href="<?= base_url("admin/tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/${no}") ?>" class="nav-link <?= (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/riwayat/{$no}") !== false) || (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/ssrd/{$no}") !== false) || (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/skrd/{$no}") !== false) || (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/skrdkb/{$no}") !== false) || (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/skrdlb/{$no}") !== false) || (strpos($uri, "tera/pembayaran/{$jenis['jenis_tempat_id']}/keringanan/{$no}") !== false) ? "active" : "" ?>">
                         <i class="nav-icon fas fa-<?= $icon ?>"></i>
                         <p class="text-capitalize">
                           Tera Pembayaran <?= $status ?>

@@ -318,7 +318,7 @@
         </div>
         <div class="row">
           <div class="col-4">
-            No Polisi / Chasis
+            No Polisi / Chasis & No. Lambung
           </div>
           <div class="col">
             : <span class="tera_uttp_no_polisi"></span>

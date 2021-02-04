@@ -67,6 +67,7 @@ class User extends Migration
 			'user_telepon'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
+				'null'					 => true,
 			],
 			'last_login'       => [
 				'type'           => 'TIMESTAMP',

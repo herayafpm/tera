@@ -1,13 +1,15 @@
 <?= $this->extend('admin/template_surat'); ?>
 <?= $this->section('content'); ?>
+<?= view("admin/components/header_surat") ?>
+
 <tr>
   <td align="center" style="padding: 20px 20px;" colspan="3">
-    <h4 style="text-transform: uppercase;"><b><u>surat tugas</u></b></h4>
-    <h4 style="font-weight: 600;white-space:pre">Nomor: <?= $_GET['no_surat'] ?? "800 /       /       /" ?></h4>
+    <p style="font-size: 19px;text-transform: uppercase;"><b><u>SURAT TUGAS</u></b></p>
+    <p style="font-size: 16px;white-space:pre">Nomor: <?= $_GET['no_surat'] ?? "800 /       /       /" ?></p>
   </td>
 </tr>
 <tr>
-  <td style="padding: 20px 20px;" colspan="3">
+  <td style="padding: 20px 40px;text-align: justify;" colspan="3">
     <table>
       <tr>
         <td style="vertical-align: top;">
@@ -34,12 +36,12 @@
   </td>
 </tr>
 <tr>
-  <td align="center" style="padding: 20px 20px;" colspan="3">
-    <h5 style="text-transform: uppercase;">MEMERINTAHKAN</h5>
+  <td align="center" style="padding: 10px 40px;" colspan="3">
+    <h5 style="text-transform: uppercase;font-size: 14px;">MEMERINTAHKAN</h5>
   </td>
 </tr>
 <tr>
-  <td style="padding:20px 20px;vertical-align: top;" colspan="3">
+  <td style="padding:10px 40px;vertical-align: top;" colspan="3">
     <table>
       <tr>
         <td style="vertical-align: top;width:20px">
@@ -47,32 +49,36 @@
         </td>
         <td style="padding-left: 5px;">
           <table>
-            <tr>
-              <td style="vertical-align: top;">1.</td>
-              <td>
-                <p style="white-space:pre">Nama &#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas1_admin_nama'] ?></p>
-                <p style="white-space:pre">Pangkat / Gol &#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas1_aparatur_pangkat'] ?></p>
-                <p style="white-space:pre">NIP &#9;&#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas1_admin_username'] ?></p>
-                <p style="white-space:pre">Jabatan &#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas1_jabatan_nama'] ?></p>
-              </td>
-            </tr>
-            <tr>
-              <td><br></td>
-            </tr>
-            <?php if ($tera_pengajuan['tera_pengajuan_petugas2'] != null) : ?>
+            <?php
+            $no = 0;
+            foreach ($petugass as $petugas) : ?>
               <tr>
-                <td style="vertical-align: top;">2.</td>
                 <td>
-                  <p style="white-space:pre">Nama &#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas2_admin_nama'] ?></p>
-                  <p style="white-space:pre">Pangkat / Gol &#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas2_aparatur_pangkat'] ?></p>
-                  <p style="white-space:pre">NIP &#9;&#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas2_admin_username'] ?></p>
-                  <p style="white-space:pre">Jabatan &#9;&#9;&#9;: <?= $tera_pengajuan['tera_pengajuan_petugas2_jabatan_nama'] ?></p>
+                  <div style="display:flex;text-align: justify;margin-bottom: 2px;">
+                    <div style="width: 115px;"><?= $no  + 1 ?>. Nama</div>
+                    <div style="margin-right: 10px;">:</div>
+                    <div style="flex:1"> <?= $petugas['tera_petugas_admin_nama'] ?></div>
+                  </div>
+                  <div style="display:flex;text-align: justify;margin-bottom: 2px;">
+                    <div style="width: 100px;padding-left: 15px;">Pangkat / Gol</div>
+                    <div style="margin-right: 10px;">:</div>
+                    <div style="flex:1"> <?= $petugas['aparatur_pangkat'] ?></div>
+                  </div>
+                  <div style="display:flex;text-align: justify;margin-bottom: 2px;">
+                    <div style="width: 100px;padding-left: 15px;">NIP</div>
+                    <div style="margin-right: 10px;">:</div>
+                    <div style="flex:1"> <?= $petugas['tera_petugas_admin_username'] ?></div>
+                  </div>
+                  <div style="display:flex;text-align: justify;margin-bottom: 2px;">
+                    <div style="width: 100px;padding-left: 15px;">Jabatan</div>
+                    <div style="margin-right: 10px;">:</div>
+                    <div style="flex:1"> <?= $petugas['jabatan_nama'] ?></div>
+                  </div>
                 </td>
               </tr>
-              <tr>
-                <td><br></td>
-              </tr>
-            <?php endif ?>
+            <?php
+              $no++;
+            endforeach ?>
           </table>
         </td>
       </tr>
@@ -80,13 +86,13 @@
   </td>
 </tr>
 <tr>
-  <td style="padding: 20px 20px;vertical-align: top;" colspan="3">
+  <td style="padding: 0px 40px;vertical-align: top;" colspan="3">
     <table>
-      <tr>
+      <tr style="text-align: justify;">
         <td style="vertical-align: top;">
           <p style="white-space:pre">Untuk&#9;&#9;&#9;: </p>
         </td>
-        <td style="padding-left: 5px;">
+        <td style="padding-left: 0px;">
           <table>
             <tr>
               <td style="vertical-align: top;">1.</td>
@@ -107,7 +113,7 @@
   </td>
 </tr>
 <tr>
-  <td style="padding: 0 20px;" colspan="3">
+  <td style="padding: 0px 20px;" colspan="3">
     <br>
     <p style="white-space:pre">Demikian untuk dilaksanakan dengan penuh tanggung jawab.</p>
     <br>

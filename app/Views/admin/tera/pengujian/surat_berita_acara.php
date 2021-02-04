@@ -8,10 +8,11 @@
 </style>
 <?= $this->endSection('customcss') ?>
 <?= $this->section('content'); ?>
+<?= view("admin/components/header_surat") ?>
 <tr>
   <td align="center" style="padding: 20px 20px;" colspan="3">
-    <h4><b>BERITA ACARA PENGUJIAN UTTP</b></h4>
-    <h4><b>DI TEMPAT PAKAI / UTTP TERPASANG</b></h4>
+    <p style="font-size: 19px;"><b>BERITA ACARA PENGUJIAN UTTP</b></p>
+    <p style="font-size: 19px;"><b>DI TEMPAT PAKAI / UTTP TERPASANG</b></p>
   </td>
 </tr>
 <tr>
@@ -24,7 +25,7 @@
     <table>
       <tr style="vertical-align: top;text-align: justify;">
         <td style="width: 20px;">1.</td>
-        <td style="width: 150px;">Dilaksanakan tanggal</td>
+        <td style="width: 200px;">Dilaksanakan tanggal</td>
         <td style="width: 10px;">:</td>
         <td><?= date("d-m-Y", strtotime($tera['tera_date_order'])) ?></td>
       </tr>
@@ -48,7 +49,7 @@
     <table>
       <tr style="vertical-align: top;text-align: justify;">
         <td style="width: 20px;">2.</td>
-        <td style="width: 150px;">Nama Perusahaan / Pemilik</td>
+        <td style="width: 200px;">Nama Perusahaan / Pemilik</td>
         <td style="width: 10px;">:</td>
         <td><?= $tera['tera_atas_nama'] ?></td>
       </tr>
@@ -66,7 +67,7 @@
     <table>
       <tr style="vertical-align: top;text-align: justify;">
         <td style="width: 20px;">3.</td>
-        <td style="width: 150px;">Pegawai yang ditugaskan</td>
+        <td style="width: 200px;">Pegawai yang ditugaskan</td>
         <td style="width: 10px;"></td>
         <td>
           <table>
@@ -91,7 +92,7 @@
     <table>
       <tr style="vertical-align: top;text-align: justify;">
         <td style="width: 20px;">4.</td>
-        <td style="width: 150px;">Jenis UTTP yang diperiksa</td>
+        <td style="width: 200px;">Jenis UTTP yang diperiksa</td>
         <td style="width: 10px;">:</td>
         <td><?= (($tera_uttp_retribusi['jenis_uttp_tipe_id'] != null) ? $tera_uttp_retribusi['jenis_uttp_tipe_nama'] . ":" : "") . $tera_uttp_retribusi['jenis_uttp_nama'] ?></td>
       </tr>
@@ -136,36 +137,35 @@
 </tr>
 <tr>
   <td style="padding: 5px 20px;" colspan="3">
-    <table>
-      <tr style="vertical-align: top;">
-        <td align="center" style="width:200px;padding: 20px 20px;">
-          <p>Mengetahui: </p>
-          <p>Kepala Bidang Metrologi</p>
-          <br>
-          <br>
-          <br>
-          <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);">..................................................................</p>
-          <p>NIP. ..........................................................</p>
-        </td>
-        <td align="center" style="width:200px;padding: 20px 20px;">
-          <p>Pihak Pemohon</p>
-          <br>
-          <br>
-          <br>
-          <br>
-          <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);"><?= $tera['user_nama'] ?></p>
-        </td>
-        <td align="center" style="width:200px;padding: 20px 20px;">
-          <p>Pegawai yang Berhak</p>
-          <br>
-          <br>
-          <br>
-          <br>
-          <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);"><?= $_admin->admin_nama ?></p>
-          <p>NIP. <?= $_admin->admin_username ?></p>
-        </td>
-      </tr>
-    </table>
+    <div style="display:flex">
+      <div style="flex:1;margin-right:20px;margin-left:20px;text-align: center;">
+        <p>Mengetahui: </p>
+        <p>Kepala Bidang Metrologi</p>
+        <br>
+        <br>
+        <br>
+        <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);">.............................................</p>
+        <p>NIP. .....................................</p>
+      </div>
+      <div style="flex:1;margin-right:20px;margin-left:20px;text-align: center;">
+        <p>Pihak Pemohon</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);"><?= $tera['user_nama'] ?></p>
+      </div>
+      <div style="flex:2;margin-right:20px;margin-left:20px;text-align: center;">
+        <p>Pegawai yang Berhak</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p style="border-bottom: 1px solid rgba(0, 0, 0, 0.6);"><?= $_admin->admin_nama ?></p>
+        <p>NIP. <?= $_admin->admin_username ?></p>
+      </div>
+
+    </div>
   </td>
 </tr>
 <?= $this->endSection('content'); ?>

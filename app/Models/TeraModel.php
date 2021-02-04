@@ -98,6 +98,28 @@ class TeraModel extends Model
     }
     return $datas; // Eksekusi query sql sesuai kondisi diatas
   }
+  public function getTeraPengujian($id)
+  {
+    $builder = $this->db->table($this->table);
+    $builder->select("{$this->table}.*");
+    $builder->select("user.*");
+    $builder->select("jenis_tera.*");
+    $builder->select("jenis_tempat.*");
+    $builder->select("tera_status_admin.admin_nama as tera_status_admin_nama");
+    $builder->select("tera_ketetapan_admin.admin_nama as tera_ketetapan_admin_nama");
+    $builder->select("tera_keringanan_admin.admin_nama as tera_keringanan_admin_nama");
+    $builder->join('user', "user.user_id = {$this->table}.user_id", 'LEFT');
+    $builder->join('jenis_tera', "jenis_tera.jenis_tera_id = {$this->table}.jenis_tera_id", 'LEFT');
+    $builder->join('jenis_tempat', "jenis_tempat.jenis_tempat_id = {$this->table}.jenis_tempat_id", 'LEFT');
+    $builder->join('admin as tera_status_admin', "tera_status_admin.admin_id = {$this->table}.tera_status_by", 'LEFT');
+    $builder->join('admin as tera_ketetapan_admin', "tera_ketetapan_admin.admin_id = {$this->table}.tera_ketetapan_by", 'LEFT');
+    $builder->join('admin as tera_keringanan_admin', "tera_keringanan_admin.admin_id = {$this->table}.tera_keringanan_by", 'LEFT');
+    $builder->where(["{$this->table}.{$this->primaryKey}" => $id]);
+    $datas = $builder->get()->getRowArray();
+    $teraUttpRetribusiModel = new TeraUttpRetribusiModel();
+    $datas['tera_uttps'] = $teraUttpRetribusiModel->getPengujianCount(['where' => ["tera_uttp_retribusi.{$this->primaryKey}" => $datas[$this->primaryKey]]]);
+    return $datas; // Eksekusi query sql sesuai kondisi diatas
+  }
   public function count_all($params = [])
   {
     $builder = $this->db->table($this->table);

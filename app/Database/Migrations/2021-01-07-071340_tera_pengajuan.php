@@ -29,17 +29,6 @@ class TeraPengajuan extends Migration
 			'tera_pengajuan_keterangan'       => [
 				'type'           => 'TEXT',
 			],
-			'tera_pengajuan_petugas_satu' => [
-				'type' => 'INT',
-				'constraint'     => 11,
-				'unsigned'          => TRUE,
-			],
-			'tera_pengajuan_petugas_dua' => [
-				'type' => 'INT',
-				'constraint'     => 11,
-				'unsigned'          => TRUE,
-				'null'							=> true
-			],
 			'tera_pengajuan_status'       => [
 				'type'           => 'INT',
 				'constraint'     => 1,

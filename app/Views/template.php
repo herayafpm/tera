@@ -51,13 +51,13 @@
           <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt=""></a>-->
           <nav class="nav-menu d-none d-lg-block">
             <ul>
-              <li class="text-capitalize <?= ($_view == 'home') ? "active" : "" ?>"><a href="<?= base_url() ?>">Home</a></li>
               <?php if (isset($_session->isLogin)) : ?>
                 <li class="text-capitalize <?= ($_view == 'user/tera/pendaftaran/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pendaftaran/riwayat') ?>">riwayat pendaftaran</a></li>
                 <li class="text-capitalize <?= ($_view == 'user/tera/pembayaran/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pembayaran/riwayat') ?>">riwayat pembayaran</a></li>
                 <li class="text-capitalize <?= ($_view == 'user/tera/pengujian/riwayat/index') ? "active" : "" ?>"><a href="<?= base_url('user/tera/pengujian/riwayat') ?>">riwayat pengujian</a></li>
+              <?php else : ?>
+                <li class="text-capitalize <?= ($_view == 'auth/lupa_password') ? "active" : "" ?>"><a href="<?= base_url('auth/lupa_password') ?>">lupa password</a></li>
               <?php endif ?>
-              <li class="text-capitalize <?= ($_view == 'auth/lupa_password') ? "active" : "" ?>"><a href="<?= base_url('auth/lupa_password') ?>">lupa password</a></li>
             </ul>
           </nav>
           <?php if (isset($_session->isLogin)) : ?>

@@ -1,15 +1,4 @@
-<?= $this->extend('admin/template_surat'); ?>
-<?= $this->section('customcss') ?>
-<style>
-  .table td:not([class^="border-none"]) {
-    border: 1px solid #000;
-    border-collapse: collapse;
-  }
-</style>
-<?= $this->endSection('customcss') ?>
-<?= $this->section('content'); ?>
 <?= view("admin/components/header_surat") ?>
-
 <tr>
   <td align="center" style="padding: 20px 20px;" colspan="3">
     <p style="font-size: 19px;"><b><u>SURAT KETERANGAN HASIL PENGUJIAN</u></b></p>
@@ -50,14 +39,14 @@
       <div style="flex:1"> <?= $tera_uttp['tera_uttp_merk'] ?> / <?= $tera_uttp['tera_uttp_tipe'] ?> / <?= $tera_uttp['tera_uttp_no_seri'] ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">3. Merk Kendaraan</div>
+      <div style="width: 225px;">3. Kapasitas / Daya Baca</div>
       <div style="margin-right: 10px;">:</div>
-      <div style="flex:1"> <?= $tera_uttp['tera_uttp_merk_kendaraan'] ?></div>
+      <div style="flex:1"> <?= $tera_uttp_retribusi['tera_uttp_kapasitas'] ?> / <?= $tera_uttp_retribusi['tera_uttp_daya_baca'] ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">4. No. Polisi dan No. Lambung</div>
+      <div style="width: 225px;">4. Buatan</div>
       <div style="margin-right: 10px;">:</div>
-      <div style="flex:1"> <?= $tera_uttp['tera_uttp_no_polisi'] ?></div>
+      <div style="flex:1"> <?= $tera_uttp['tera_uttp_buatan'] ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
       <div style="width: 225px;">5. Pemilik / Pemakai</div>
@@ -65,22 +54,27 @@
       <div style="flex:1"> <?= $tera['tera_atas_nama'] ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">6. Diuji Oleh</div>
+      <div style="width: 225px;">6. Alamat</div>
+      <div style="margin-right: 10px;">:</div>
+      <div style="flex:1"> <?= $tera['tera_atas_nama_alamat'] ?></div>
+    </div>
+    <div style="display:flex;text-align: justify;margin-bottom: 5px;">
+      <div style="width: 225px;">7. Diuji Oleh</div>
       <div style="margin-right: 10px;">:</div>
       <div style="flex:1"> <?= $tera_uttp['admin_nama'] ?> NIP. <?= $tera_uttp['admin_username'] ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">7. Tanggal Pengujian</div>
+      <div style="width: 225px;">8. Tanggal Pengujian</div>
       <div style="margin-right: 10px;">:</div>
       <div style="flex:1"> <?= date("d-m-Y", strtotime($tera_uttp['tera_uttp_pengujian_at'])) ?></div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">8. Metode</div>
+      <div style="width: 225px;">9. Metode</div>
       <div style="margin-right: 10px;">:</div>
       <div style="flex:1"> Perbandingan Langsung dengan standar</div>
     </div>
     <div style="display:flex;text-align: justify;margin-bottom: 5px;">
-      <div style="width: 225px;">9. Hasil Pengujian</div>
+      <div style="width: 225px;">10. Hasil Pengujian</div>
       <div style="margin-right: 10px;">:</div>
       <div style="flex:1"> Disahkan Untuk <?= $tera['jenis_tera_nama'] ?> Tahun <?= date("Y", strtotime($tera_uttp['tera_uttp_pengujian_at'])) ?> berdasarkan Undang - Undang Republik Indonesia Nomor 2 Tahun 1981 tentang Metrologi Legal dengan membubuhkan Tanda Sah dan Tanda Jaminan</div>
     </div>
@@ -96,7 +90,7 @@
   <td style="padding: 5px 20px;">
 
   </td>
-  <td align="center" style="width:200px;padding: 20px 40px;">
+  <td align="center" style="width:200px;padding: 20px 20px;">
     <p>......................................, <?= date("d - m - Y") ?></p>
     <p>a.n KEPALA DINPERINDAG</p>
     <p>KAB. BANYUMAS</p>
@@ -140,8 +134,7 @@
   </td>
 </tr>
 <tr>
-  <td style="padding: 5px 20px;text-align:center" colspan="3">
+  <td style="padding: 5px 25px;text-align:center" colspan="3">
     Dilarang menggandakan sebagian isi Surat Keterangan ini tanpa seijin dari Bidang Metrologi Dinperindag Kab. Banyumas
   </td>
 </tr>
-<?= $this->endSection('content'); ?>

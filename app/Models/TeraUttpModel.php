@@ -28,7 +28,7 @@ class TeraUttpModel extends Model
       array_push($teraUttpDetail, "tera_uttp_detail.{$teraUttp}");
     }
     $builder->select("{$this->table}.*");
-    $builder->select("admin.*");
+    $builder->select("admin.admin_username,admin.admin_nama");
     $builder->select(implode(",", $teraUttpDetail));
     $builder->join('admin', "admin.admin_id = {$this->table}.tera_uttp_pengujian_status_by", 'LEFT');
     $builder->join('tera_uttp_detail', "tera_uttp_detail.{$this->primaryKey} = {$this->table}.{$this->primaryKey}", 'LEFT');
@@ -43,6 +43,24 @@ class TeraUttpModel extends Model
     $datas = $builder->get()->getResultArray();
     return $datas; // Eksekusi query sql sesuai kondisi diatas
   }
+  public function getPengujian($params = [])
+  {
+    $builder = $this->db->table($this->table);
+    $teraUttpDetail = [];
+    foreach ($this->teraUttpDetail as $teraUttp) {
+      array_push($teraUttpDetail, "tera_uttp_detail.{$teraUttp}");
+    }
+    $builder->select("{$this->table}.*");
+    $builder->select("admin.admin_username,admin.admin_nama");
+    $builder->select(implode(",", $teraUttpDetail));
+    $builder->join('admin', "admin.admin_id = {$this->table}.tera_uttp_pengujian_status_by", 'LEFT');
+    $builder->join('tera_uttp_detail', "tera_uttp_detail.{$this->primaryKey} = {$this->table}.{$this->primaryKey}", 'LEFT');
+    if (isset($params['where'])) {
+      $builder->where($params['where']);
+    }
+    $datas = $builder->get()->getResultArray();
+    return $datas; // Eksekusi query sql sesuai kondisi diatas
+  }
   public function getTeraUttp($tera_uttp_id)
   {
     $builder = $this->db->table($this->table);
@@ -51,7 +69,7 @@ class TeraUttpModel extends Model
       array_push($teraUttpDetail, "tera_uttp_detail.{$teraUttp}");
     }
     $builder->select("{$this->table}.*");
-    $builder->select("admin.*");
+    $builder->select("admin.admin_username,admin.admin_nama");
     $builder->select(implode(",", $teraUttpDetail));
     $builder->join('admin', "admin.admin_id = {$this->table}.tera_uttp_pengujian_status_by", 'LEFT');
     $builder->join('tera_uttp_detail', "tera_uttp_detail.{$this->primaryKey} = {$this->table}.{$this->primaryKey}", 'LEFT');
@@ -67,7 +85,7 @@ class TeraUttpModel extends Model
       array_push($teraUttpDetail, "tera_uttp_detail.{$teraUttp}");
     }
     $builder->select("{$this->table}.*");
-    $builder->select("admin.*");
+    $builder->select("admin.admin_username,admin.admin_nama");
     $builder->select(implode(",", $teraUttpDetail));
     $builder->join('admin', "admin.admin_id = {$this->table}.tera_uttp_pengujian_status_by", 'LEFT');
     $builder->join('tera_uttp_detail', "tera_uttp_detail.{$this->primaryKey} = {$this->table}.{$this->primaryKey}", 'LEFT');
@@ -83,7 +101,7 @@ class TeraUttpModel extends Model
       array_push($teraUttpDetail, "tera_uttp_detail.{$teraUttp}");
     }
     $builder->select("{$this->table}.*");
-    $builder->select("admin.*");
+    $builder->select("admin.admin_username,admin.admin_nama");
     $builder->select(implode(",", $teraUttpDetail));
     $builder->join('admin', "admin.admin_id = {$this->table}.tera_uttp_pengujian_status_by", 'LEFT');
     $builder->join('tera_uttp_detail', "tera_uttp_detail.{$this->primaryKey} = {$this->table}.{$this->primaryKey}", 'LEFT');
@@ -95,6 +113,13 @@ class TeraUttpModel extends Model
         $builder->like($key, $value);
       }
     }
+    return $builder->countAllResults();
+  }
+  public function getCountTeraUttpStatus($tera_uttp_retribusi_id, $status)
+  {
+    $builder = $this->db->table($this->table);
+    $builder->select("{$this->table}.{$this->primaryKey}");
+    $builder->where(['tera_uttp_retribusi_id' => $tera_uttp_retribusi_id, 'tera_uttp_pengujian_status' => $status]);
     return $builder->countAllResults();
   }
   public function getCountTeraPengujian($tera_uttp_retribusi_id)

@@ -48,23 +48,44 @@
             : <span><?= $_tera['tera_atas_nama_alamat'] ?></span>
           </div>
         </div>
-        <input type="hidden" name="jenis_uttp_ids[]" class="form-jenis_uttp_ids" value="<?= implode(",", old('jenis_uttp_ids', $_jenis_uttp_ids) ?? []) ?>">
-        <input type="hidden" name="jenis_uttp_namas[]" class="form-jenis_uttp_namas" value="<?= implode(",", old('jenis_uttp_namas', $_jenis_uttp_namas) ?? []) ?>">
-        <input type="hidden" name="kapasitass[]" class="form-kapasitass" value="<?= implode(",", old('kapasitass', $_kapasitass) ?? []) ?>">
-        <input type="hidden" name="daya_bacas[]" class="form-daya_bacas" value="<?= implode(",", old('daya_bacas', $_daya_bacas) ?? []) ?>">
-        <input type="hidden" name="jumlahs[]" class="form-jumlahs" value="<?= implode(",", old('jumlahs', $_jumlahs) ?? []) ?>">
-        <input type="hidden" name="tera_uttp_ids[]" class="form-tera_uttp_ids" value="<?= implode(",", old('tera_uttp_ids', $_tera_uttp_ids) ?? []) ?>">
         <div class="table-responsive">
           <table class="table table-stripped table-hover">
             <thead>
               <th>#</th>
               <th>Jenis UTTP</th>
               <th>Kapasitas / Daya Baca</th>
-              <th>Jumlah</th>
               <th>Jenis Pekerjaan</th>
+              <th>Jumlah</th>
+              <th>Proses</th>
+              <th>Sah</th>
+              <th>Batal</th>
               <th>Aksi</th>
             </thead>
             <tbody class="tbody-jenis_uttps">
+              <?php
+              $no = 0;
+              foreach ($_tera['tera_uttps'] as $tera_uttp) : ?>
+                <tr>
+                  <td><?= $no + 1 ?></td>
+                  <td><?= (($tera_uttp['jenis_uttp_tipe_id'] != null) ? $tera_uttp['jenis_uttp_tipe_nama'] . ":" : "") . $tera_uttp['jenis_uttp_nama'] ?></td>
+                  <td><span class="formatRupiah"><?= $tera_uttp['tera_uttp_kapasitas'] ?> </span> / <?= $tera_uttp['tera_uttp_daya_baca'] ?></td>
+                  <td><?= $_tera['jenis_tera_nama'] ?></td>
+                  <td><span class="formatRupiah"><?= $tera_uttp['tera_uttp_jumlah'] ?> </span></td>
+                  <td class="formatRupiah"><?= $tera_uttp['proses'] ?></td>
+                  <td class="formatRupiah"><?= $tera_uttp['sah'] ?></td>
+                  <td class="formatRupiah"><?= $tera_uttp['batal'] ?></td>
+                  <td><a role="button" class="btn btn-link text-info" target="_blank" href="<?= $_url_pengujian ?>/<?= $_tera['tera_id'] ?>/<?= $tera_uttp['tera_uttp_retribusi_id'] ?>">Pengujian</a>
+                    <?php if ($_tera['tera_status_pengujian'] == 1 && $_tera['jenis_tempat_id'] == 2 && $_role_id == 4) : ?>
+                      <button class="btn btn-link text-info" onClick="printBeritaAcara(<?= $tera_uttp['tera_uttp_retribusi_id'] ?>)">Cetak Berita Acara</button>
+                    <?php endif ?>
+                    <?php if ($_tera['tera_status_pengujian'] == 1 && $_tera['jenis_tempat_id'] == 2 && $_role_id == 5) : ?>
+                    <?php endif ?>
+                    <button class="btn btn-link text-info" onClick="printHasilPengujian(<?= $tera_uttp['tera_uttp_retribusi_id'] ?>)">Cetak Surat Hasil Pengujian</button>
+                  </td>
+                </tr>
+              <?php
+                $no++;
+              endforeach ?>
             </tbody>
           </table>
         </div>
@@ -118,26 +139,6 @@
 <script src="<?= base_url('assets/vendor') ?>/adminlte/plugins/inputmask/jquery.inputmask.min.js"></script>
 
 <script>
-  var jenis_uttp_ids = [];
-  var jenis_uttp_namas = [];
-  var kapasitass = [];
-  var daya_bacas = [];
-  var jumlahs = [];
-  var tera_uttp_ids = [];
-  var jenis;
-  var kapasitas;
-  var daya_baca;
-  var jumlah;
-  $(document).ready(function() {
-    tera_uttp_ids = $('.form-tera_uttp_ids').val().split(",").filter((e) => e != "")
-    jenis_uttp_ids = $('.form-jenis_uttp_ids').val().split(",").filter((e) => e != "")
-    jenis_uttp_namas = $('.form-jenis_uttp_namas').val().split(",").filter((e) => e != "")
-    kapasitass = $('.form-kapasitass').val().split(",").filter((e) => e != "")
-    daya_bacas = $('.form-daya_bacas').val().split(",").filter((e) => e != "")
-    jumlahs = $('.form-jumlahs').val().split(",").filter((e) => e != "")
-    updateTabel()
-  })
-
   async function printBeritaAcara(id) {
     const {
       value: no_surat_permohonan
@@ -179,37 +180,8 @@
     }
   }
 
-  function updateTabel() {
-    $('.tbody-jenis_uttps').html("")
-    var html = ""
-    jenis_uttp_ids.forEach((item, index) => {
-      html += "<tr>"
-      html += "<td>"
-      html += index + 1
-      html += "</td>"
-      html += "<td>"
-      html += jenis_uttp_namas[index]
-      html += "</td>"
-      html += "<td>"
-      html += formatRupiah(kapasitass[index])
-      html += " "
-      html += daya_bacas[index]
-      html += "</td>"
-      html += "<td>"
-      html += formatRupiah(jumlahs[index])
-      html += "</td>"
-      html += "<td>"
-      html += "<?= $_tera['jenis_tera_nama'] ?>"
-      html += "</td>"
-      html += "<td>"
-      html += '<a role="button" class="btn btn-link text-info" target="_blank" href="<?= $_url_pengujian ?>/<?= $_tera['tera_id'] ?>/' + tera_uttp_ids[index] + '">Pengujian</a>'
-      if ("<?= $_tera['tera_status_pengujian'] ?>" == 1 && "<?= $_tera['jenis_tempat_id'] ?>" == 2 && "<?= $_role_id ?>" == 4) {
-        html += '<button class="btn btn-link text-info" onClick="printBeritaAcara(' + tera_uttp_ids[index] + ')">Cetak Berita Acara</button>'
-      }
-      html += "</td>"
-      html += "</tr>"
-    })
-    $('.tbody-jenis_uttps').html(html)
+  function printHasilPengujian(id) {
+    window.open("<?= $_url_pengujian ?>/<?= $_tera['tera_id'] ?>/" + id + "/print_hasil_pengujian", "_blank ")
   }
 </script>
 <?= $this->endSection('customjs'); ?>

@@ -87,14 +87,24 @@ class HasilPengujianAll extends BaseController
       'tera_uttp_tipe' => htmlspecialchars($this->request->getPost('tera_uttp_tipe')),
       'tera_uttp_no_seri' => htmlspecialchars($this->request->getPost('tera_uttp_no_seri')),
       'tera_uttp_buatan' => htmlspecialchars($this->request->getPost('tera_uttp_buatan')),
+      'tera_uttp_keterangan' => htmlspecialchars($this->request->getPost('tera_uttp_keterangan')),
     ];
     $this->form_validation->setRules($rule);
     if (!$this->form_validation->run($data)) {
       return redirect()->back()->withInput();
     } else {
       $data['tera_uttp_pengujian_at'] = date('Y-m-d H:i:s');
+      $data['tera_uttp_volume'] = null;
+      $data['tera_uttp_merk_kendaraan'] = null;
+      $data['tera_uttp_no_polisi'] = null;
+      $data['tera_uttp_no_kd_plat'] = null;
       $teraUttpModel = new TeraUttpModel();
       if ($teraUttpModel->where('tera_uttp_retribusi_id', $teraUttpRetribusi['tera_uttp_retribusi_id'])->set($data)->update()) {
+        $teraUttps = $teraUttpModel->where(['tera_uttp_retribusi_id' => $teraUttpRetribusi['tera_uttp_retribusi_id']])->get()->getResultArray();
+        $teraUttpDetailModel = new TeraUttpDetailModel();
+        foreach ($teraUttps as $uttp) {
+          $teraUttpDetailModel->where('tera_uttp_id', $uttp['tera_uttp_id'])->delete();
+        }
         $teraModel = new TeraModel();
         $teraModel->update($tera['tera_id'], ['tera_status_pengujian' => 1]);
         $this->session->setFlashdata('success', 'Berhasil Menguji Tera UTTP');
@@ -309,6 +319,7 @@ class HasilPengujianAll extends BaseController
       return redirect()->back()->withInput();
     } else {
       $data['tera_uttp_tipe'] = null;
+      $data['tera_uttp_buatan'] = null;
       $data['tera_uttp_pengujian_at'] = date('Y-m-d H:i:s');
       $teraUttpModel = new TeraUttpModel();
       if ($teraUttpModel->where('tera_uttp_retribusi_id', $teraUttpRetribusi['tera_uttp_retribusi_id'])->set($data)->update()) {
@@ -378,14 +389,23 @@ class HasilPengujianAll extends BaseController
       'tera_uttp_no_seri' => htmlspecialchars($this->request->getPost('tera_uttp_no_seri')),
       'tera_uttp_merk_kendaraan' => htmlspecialchars($this->request->getPost('tera_uttp_merk_kendaraan')),
       'tera_uttp_no_polisi' => htmlspecialchars($this->request->getPost('tera_uttp_no_polisi')),
+      'tera_uttp_keterangan' => htmlspecialchars($this->request->getPost('tera_uttp_keterangan')),
     ];
     $this->form_validation->setRules($rule);
     if (!$this->form_validation->run($data)) {
       return redirect()->back()->withInput();
     } else {
+      $data['tera_uttp_no_kd_plat'] = null;
+      $data['tera_uttp_volume'] = null;
+      $data['tera_uttp_buatan'] = null;
       $data['tera_uttp_pengujian_at'] = date('Y-m-d H:i:s');
       $teraUttpModel = new TeraUttpModel();
       if ($teraUttpModel->where('tera_uttp_retribusi_id', $teraUttpRetribusi['tera_uttp_retribusi_id'])->set($data)->update()) {
+        $teraUttps = $teraUttpModel->where(['tera_uttp_retribusi_id' => $teraUttpRetribusi['tera_uttp_retribusi_id']])->get()->getResultArray();
+        $teraUttpDetailModel = new TeraUttpDetailModel();
+        foreach ($teraUttps as $uttp) {
+          $teraUttpDetailModel->where('tera_uttp_id', $uttp['tera_uttp_id'])->delete();
+        }
         $teraModel = new TeraModel();
         $teraModel->update($tera['tera_id'], ['tera_status_pengujian' => 1]);
         $this->session->setFlashdata('success', 'Berhasil Menguji Tera UTTP');

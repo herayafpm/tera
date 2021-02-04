@@ -1,13 +1,3 @@
-<?= $this->extend('admin/template_surat'); ?>
-<?= $this->section('customcss') ?>
-<style>
-  .table td:not([class^="border-none"]) {
-    border: 1px solid #000;
-    border-collapse: collapse;
-  }
-</style>
-<?= $this->endSection('customcss') ?>
-<?= $this->section('content'); ?>
 <?= view("admin/components/header_surat_legal") ?>
 
 <tr>
@@ -221,4 +211,3 @@
     <p>3. Ukuran kertas: Legal 80 gram, Logo Pemkab berwarna, Logo Bancana berwarna kuning.</p>
   </td>
 </tr>
-<?= $this->endSection('content'); ?>
